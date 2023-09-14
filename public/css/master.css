@@ -1,0 +1,44 @@
+.custom-btn {
+    background-color: #8F5E2E;
+    border-color: #8F5E2E;
+    color: white;
+}
+
+.custom-btn:hover {
+    background-color: #8F5E2E;
+    border-color: #8F5E2E;
+    color: white;
+}
+
+.custom-btn-outline {
+    border-color: #8F5E2E;
+    color: #8F5E2E;
+}
+
+.custom-btn-outline:hover {
+    border-color: #8F5E2E;
+    color: #8F5E2E;
+}
+
+.form-control:focus {
+    border-color: #8F5E2E;
+    box-shadow: 0 0 0 0.2rem rgba(143, 94, 46, 0.25);
+} 
+
+.form-select:focus {
+    border-color: #8F5E2E;
+    box-shadow: 0 0 0 0.2rem rgba(143, 94, 46, 0.25);
+} 
+
+select option:checked {
+    background-color: #8F5E2E!important;
+    color: white!important;
+}
+
+.card {
+    transition: transform .2s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
