@@ -23,9 +23,51 @@
       <ul class="navbar-nav">
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/login"><i class="fa-regular fa-user"></i></a>
+          <a class="nav-link" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+        </li>
+
+        @auth
+        <li class="nav-item">
+          <div class="dropdown">
+            <a class="nav-link btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-regular fa-user"></i>
+            </a>
+          
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="/purchase">Purchase</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/wishlist">Wishlist</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="/settings">Settings</a>
+              </li>
+
+              <li><hr class="dropdown-divider"></li>
+
+              <li>
+                <form action="/logout" method="POST">
+                  @csrf
+                  <button class="dropdown-item" href="/logout">Logout</button>
+                </form>
+              </li>
+
+
+
+              
+            </ul>
+          </div>
         </li>
       </ul>
+          
+
+        @else
+        <li class="nav-item">
+          <a class="text-decoration-none text-dark" href="/login">Login</a>
+        </li>
+        @endauth
 
      
 
