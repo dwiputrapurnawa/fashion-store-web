@@ -65,7 +65,7 @@
 
         @else
         <li class="nav-item">
-          <a class="text-decoration-none text-dark" href="/login">Login</a>
+          <a class="nav-link text-decoration-none text-dark" href="/login">Login</a>
         </li>
         @endauth
 
