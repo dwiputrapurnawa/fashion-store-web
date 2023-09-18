@@ -1,3 +1,7 @@
+html * {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .custom-btn {
     background-color: #8F5E2E;
     border-color: #8F5E2E;
