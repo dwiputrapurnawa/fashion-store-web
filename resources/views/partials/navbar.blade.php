@@ -22,9 +22,9 @@
 
       <ul class="navbar-nav">
 
-        <li class="nav-item">
+        {{-- <li class="nav-item me-2">
           <a class="nav-link" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-        </li>
+        </li> --}}
 
         @auth
         <li class="nav-item">
@@ -53,21 +53,22 @@
                   <button class="dropdown-item" href="/logout">Logout</button>
                 </form>
               </li>
-
-
-
-              
             </ul>
           </div>
         </li>
+        @else
+          <li class="nav-item me-2">
+            <a class="btn custom-btn-outline" href="/login">Login</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="btn custom-btn-outline-reverse" href="/register">Register</a>
+          </li>
+        @endauth
       </ul>
           
 
-        @else
-        <li class="nav-item">
-          <a class="nav-link text-decoration-none text-dark" href="/login">Login</a>
-        </li>
-        @endauth
+        
 
      
 

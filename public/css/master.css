@@ -46,3 +46,15 @@ select option:checked {
 .card:hover {
     transform: scale(1.1);
 }
+
+.custom-btn-outline-reverse {
+    border-color: #8F5E2E;
+    background-color: #8F5E2E;
+    color: white;
+}
+
+.custom-btn-outline-reverse:hover {
+    border-color: #8F5E2E;
+    background-color: #8F5E2E;
+    color: white;
+}

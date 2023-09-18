@@ -19,7 +19,7 @@
 
         <form action="/register" method="POST">
             @csrf
-          <h1 class="h3 mb-3 fw-normal">Register New Account</h1>
+          <h1 class="h3 mb-3 fw-normal">Register</h1>
       
           <div class="form-floating">
             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" name="email" required>

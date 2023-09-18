@@ -32,7 +32,7 @@
 
         <form action="/login" method="POST">
           @csrf
-          <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+          <h1 class="h3 mb-3 fw-normal">Login</h1>
       
           <div class="form-floating">
             <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
