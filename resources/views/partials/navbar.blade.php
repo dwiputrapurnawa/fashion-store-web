@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Categories</a>
+          <a class="nav-link custom-highlight" aria-current="page" href="/">Categories</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Deals</a>
+          <a class="nav-link custom-highlight" aria-current="page" href="/">Deals</a>
         </li>
 
         <form class="d-flex mx-3" role="search">
@@ -22,27 +22,30 @@
 
       <ul class="navbar-nav">
 
-        {{-- <li class="nav-item me-2">
-          <a class="nav-link" href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-        </li> --}}
+        <li class="nav-item me-2">
+          <a class="nav-link custom-highlight" href="/cart"><i class="size-icon" data-feather="shopping-cart"></i></a>
+        </li>
 
+        <div class="vr mx-3 my-2"></div>
+    
         @auth
         <li class="nav-item">
           <div class="dropdown">
-            <a class="nav-link btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-regular fa-user"></i>
+            <a class="nav-link btn custom-highlight" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i data-feather="user"></i>
+              {{ auth()->user()->name }}
             </a>
           
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu p-2">
               <li>
-                <a class="dropdown-item" href="/purchase">Purchase</a>
+                <a class="dropdown-item custom-highlight" href="/purchase">Purchase</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/wishlist">Wishlist</a>
+                <a class="dropdown-item custom-highlight" href="/wishlist">Wishlist</a>
               </li>
 
               <li>
-                <a class="dropdown-item" href="/settings">Settings</a>
+                <a class="dropdown-item custom-highlight" href="/settings">Settings</a>
               </li>
 
               <li><hr class="dropdown-divider"></li>
@@ -50,7 +53,7 @@
               <li>
                 <form action="/logout" method="POST">
                   @csrf
-                  <button class="dropdown-item" href="/logout">Logout</button>
+                  <button class="dropdown-item custom-highlight" href="/logout">Logout</button>
                 </form>
               </li>
             </ul>

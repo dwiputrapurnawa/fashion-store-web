@@ -58,3 +58,13 @@ select option:checked {
     background-color: #8F5E2E;
     color: white;
 }
+
+.size-icon{
+    width: 22px;
+    height: 22px;
+}
+
+.custom-highlight:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
