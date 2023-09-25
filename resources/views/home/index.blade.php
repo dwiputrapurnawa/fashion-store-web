@@ -6,6 +6,13 @@
 
 @section('content')
 
+@if (session()->has("message"))
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{ session("message") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
+
     @include('partials.carousel')
 
    <div class="mt-5 col-lg-2 col-md-2 ms-auto">
@@ -37,6 +44,8 @@
 
           <form action="/cart" method="post">
             @csrf
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
             <button type="submit" class="btn custom-btn w-100">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
             </form>
 
