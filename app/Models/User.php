@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -44,7 +45,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function product() {
-        return $this->belongsToMany(Product::class, "carts");
+    public function product_cart() {
+        return $this->belongsToMany(Product::class, "carts")->withPivot("quantity", "id");
+    }
+
+    public function getTotalPrice() {
+        return $this->product_cart()->sum(DB::raw("quantity * price"));
     }
 }

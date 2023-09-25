@@ -34,3 +34,6 @@ Route::get("/product/{product:slug}", [ProductPageController::class, "index"]);
 Route::get("/categories/{category:slug}", [CategoryPageController::class, "index"]);
 
 Route::get("/cart", [CartController::class, "index"]);
+Route::post("/cart", [CartController::class, "store"]);
+Route::delete("/cart", [CartController::class, "destroy"]);
+Route::patch("/cart", [CartController::class, "update"]);

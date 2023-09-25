@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("slug")->unique();
-            $table->decimal("price")->default(0);
+            $table->decimal("price", 10, 2, true)->default(0);
             $table->integer("stock", false, true)->default(0);
             $table->text("description")->nullable();
             $table->foreignId("category_id");

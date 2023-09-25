@@ -7,6 +7,13 @@
 @section('content')
     <div class="row">
 
+        @if (session()->has("message"))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session("message") }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -35,8 +42,7 @@
                 </div>
                 <p class="d-inline col-sm-auto">Review (14)</p>
             </div>
-            <h3 class="fw-bold d-inline">Rp.</h3>
-            <h3 class="fw-bold product-price d-inline">{{ $product->price }}</h3>
+            <h3 class="fw-bold product-price currency d-inline">{{ $product->price }}</h3>
             <hr>
 
             <p>{{ $product->description }}</p>
@@ -47,26 +53,37 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title mb-3">Set Amount</h5>
-                  <form action="" method="POST" class="p-2">
-                    <div class="mb-3">
-                        <input class="form-control" type="number" name="total" min="1" id="total">
+                  <form action="/cart" method="POST" class="p-2">
+                    @csrf
+                    <div class="row mb-3 m-auto">
+                        <div class="col-sm-auto">
+                            <button class="btn custom-btn minus-button" type="button"><i class="fa-solid fa-minus"></i></button>
+                        </div>
+                        <div class="col-sm-auto">
+                            <input class="form-control" type="number" name="quantity" min="1" value="1" max="{{ $product->stock }}" id="quantity">
+                        </div>
+                        <div class="col-sm-auto">
+                            <button class="btn custom-btn plus-button" type="button"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                     </div>
                     <div class="mb-3">
-                        <p>Stock Total: 20</p>
+                        <p class="d-inline">Total Stock: </p>
+                        <p class="stock d-inline">{{ $product->stock }}</p>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-3">
                         <div class="col-sm-auto">
                             <p>Subtotal</p>
                         </div>
                         <div class="col-sm-auto">
-                            <h5 class="fw-bold subtotal">Rp. 100.000</h5>
+                            <h5 class="fw-bold subtotal currency">{{ $product->price }}</h5>
                         </div>
                     </div>
                     <button class="btn custom-btn w-100" type="submit">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
                   </form>
                 
-                  <form action="" class="p-2">
+                  <form action="/wishlist" method="POST" class="p-2">
                     <button class="btn custom-btn-outline w-100" type="submit">Wishlist <i class="fa-regular fa-heart"></i></button>
                   </form>
                   

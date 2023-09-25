@@ -28,7 +28,7 @@
         <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="card-img-top" alt="card-img">
         <div class="card-body">
           <h5 class="card-title">{{ $product->name }}</h5>
-          <p class="card-text">Rp. {{ $product->price }}</p>
+          <p class="card-text currency">{{ $product->price }}</p>
           
             <div class="mb-3">
                 <i class="fa-solid fa-star" style="color: yellow;"></i>

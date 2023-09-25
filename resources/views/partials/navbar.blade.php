@@ -35,9 +35,12 @@
 
       <li class="nav-item me-2">
         <a class="nav-link custom-highlight position-relative" href="/cart"><i class="size-icon" data-feather="shopping-cart"></i>
-          <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-            2
-            <span class="visually-hidden">unread messages</span>
+          @auth
+            @if (auth()->user()->product_cart->sum("pivot.quantity") != 0)
+            <span class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ auth()->user()->product_cart->sum("pivot.quantity") }}
+            @endif
+          @endauth
         </a>
       </li>
 

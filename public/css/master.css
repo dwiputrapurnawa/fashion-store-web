@@ -111,3 +111,9 @@ select option:checked {
     padding-bottom: 1rem;
     border-radius: 0.2rem;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
