@@ -28,7 +28,6 @@
       <h3>Cart</h3>
       <hr>
         @foreach ($products as $product)
-        <a class="text-decoration-none mb-3" href="/product/{{ $product->slug }}">
           <div class="card mb-3" id="card" style="width: 50rem">
             <div class="row g-0">
               <div class="col-md-4">
@@ -77,7 +76,6 @@
               </div>
             </div>
           </div>
-        </a>
 
 
               <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDelete" aria-hidden="true">
