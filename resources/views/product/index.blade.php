@@ -82,10 +82,23 @@
                     </div>
                     <button class="btn custom-btn w-100" type="submit">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
                   </form>
+
+                  @if (auth()->user()->wishlist->contains("id", $product->id))
+                        <form action="/wishlist" method="POST" class="p-2">
+                            @method("delete")
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <button class="btn custom-btn-outline w-100" type="submit">Wishlist <i class="fa-solid fa-heart"></i></button>
+                        </form>
+                  @else
+                    <form action="/wishlist" method="POST" class="p-2">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <button class="btn custom-btn-outline w-100" type="submit">Wishlist <i class="fa-regular fa-heart"></i></button>
+                    </form>
+                  @endif
                 
-                  <form action="/wishlist" method="POST" class="p-2">
-                    <button class="btn custom-btn-outline w-100" type="submit">Wishlist <i class="fa-regular fa-heart"></i></button>
-                  </form>
+                  
                   
                 </div>
               </div>

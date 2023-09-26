@@ -31,18 +31,20 @@
           <div class="card mb-3" id="card" style="width: 50rem">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="img-fluid rounded-start" alt="...">
+                <a href="/product/{{ $product->slug }}">
+                  <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="img-fluid rounded-start" alt="product-img">
+                </a>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{ $product->name }}</h5>
+                  <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
                   <input type="hidden" name="cart_id" value="{{ $product->pivot->id }}">
                   <p class="card-text product-price currency fw-bold">{{ $product->price }}</p>
                   <div class="row mb-3">
                     <p class="d-inline col-sm-auto">Total Stock: </p>
                     <p class="stock d-inline col-sm-auto">{{ $product->stock }}</p>
                 </div>
-
+                <hr>
                 <div class="row mt-3">
                   <div class="col-sm">
                     <p class="fw-bold">Subtotal</p>
@@ -68,7 +70,7 @@
                     </div>
 
                     <div class="col-sm">
-                      <button class="btn btn-danger float-end" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-danger float-end" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete{{ $product->name }}"><i class="fa-solid fa-trash"></i></button>
                     </div>
                     
                   </div>
@@ -78,11 +80,11 @@
           </div>
 
 
-              <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDelete" aria-hidden="true">
+              <div class="modal fade" id="confirmDelete{{ $product->name }}" tabindex="-1" aria-labelledby="confirmDelete" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Delete</h1>
+                      <h1 class="modal-title fs-5">Confirm Delete</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="/cart" method="POST">

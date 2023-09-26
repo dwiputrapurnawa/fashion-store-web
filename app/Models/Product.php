@@ -15,7 +15,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function user() {
+    public function user_cart() {
         return $this->belongsToMany(User::class, "carts")->withPivot("quantity", "id");
+    }
+
+    public function user_wishlist() {
+        return $this->belongsToMany(User::class, "wishlists")->withPivot("id");
     }
 }

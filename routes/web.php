@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +38,7 @@ Route::get("/cart", [CartController::class, "index"]);
 Route::post("/cart", [CartController::class, "store"]);
 Route::delete("/cart", [CartController::class, "destroy"]);
 Route::patch("/cart", [CartController::class, "update"]);
+
+Route::get("/wishlist", [WishlistController::class, "index"]);
+Route::post("/wishlist", [WishlistController::class, "store"]);
+Route::delete("/wishlist", [WishlistController::class, "destroy"]);
