@@ -6,12 +6,20 @@
 
 @section('content')
 
+
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
     </ol>
   </nav>
+
+  @if (session()->has("message"))
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    {{ session("message") }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
 
 <div class="row">
 
