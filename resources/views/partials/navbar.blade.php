@@ -20,7 +20,7 @@
         </div>
 
         <li class="nav-item">
-          <a class="nav-link custom-highlight" aria-current="page" href="/">Deals</a>
+          <a class="nav-link custom-highlight" aria-current="page" href="#deals">Deals</a>
         </li>
 
         <div class="d-flex mx-3">

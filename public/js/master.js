@@ -124,7 +124,7 @@ $(function() {
     $("#search-button").on("click", function() {
         const searchValue = $("input[name='search']").val();
 
-        window.location.href = window.location.href + "?search=" + searchValue + "#product-list"
+        window.location.href = "/?search=" + searchValue + "#product-list"
 
     });
 
@@ -135,5 +135,24 @@ $(function() {
             $("#search-button").click();
         }
 
+    });
+
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        autoHeight: true,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+            },
+            600:{
+                items:2,
+            },
+            1000:{
+                items:4,
+            }
+        }
     })
+      
 })
