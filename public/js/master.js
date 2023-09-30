@@ -92,7 +92,7 @@ $(function() {
 
             location.replace(location.href.split('#')[0]);
         })
-    })
+    });
 
 
     $(".minus-cart-button").each(function(index) {
@@ -119,5 +119,5 @@ $(function() {
 
             location.replace(location.href.split('#')[0]);
         })
-    })
+    });
 })

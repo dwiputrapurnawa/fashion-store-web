@@ -15,7 +15,7 @@
 
   @if ($products->isEmpty())
   
-      <div class="m-auto text-align-center" style="width: 25rem;">
+      <div class="empty" style="width: 25rem;">
         <img class="img-fluid m-auto d-block" src="/images/empty-cart.png" alt="empty-cart" style="width: 10rem;">
         <h2 class="mb-4 mt-3">Your Cart is <span class="fw-bold" style="color: #8F5E2E">Empty!</span></h2>
         <a href="/" class="btn custom-btn w-100">Return To Shop</a>
