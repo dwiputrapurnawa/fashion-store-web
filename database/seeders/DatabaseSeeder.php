@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(20)->create();
         Category::factory(3)->create();
         Wishlist::factory(10)->create();
+        Rating::factory(50)->create();
         // Cart::factory(20)->create();
     }
 }

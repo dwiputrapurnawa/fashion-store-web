@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -21,6 +22,14 @@ class Product extends Model
 
     public function user_wishlist() {
         return $this->belongsToMany(User::class, "wishlists")->withPivot("id");
+    }
+
+    public function user_rating() {
+        return $this->belongsToMany(User::class, "ratings")->withPivot("value");
+    }
+
+    public function getAvgRating() {
+        return $this->user_rating()->avg("value");
     }
 
     public function scopeFilter($query, $filter) {

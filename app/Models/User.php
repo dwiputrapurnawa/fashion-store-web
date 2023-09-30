@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, "wishlists")->withPivot("id");
     }
 
+    public function product_rating() {
+        return $this->belongsToMany(Product::class, "ratings")->withPivot("value");
+    }
+
     public function getTotalPrice() {
         return $this->product_cart()->sum(DB::raw("quantity * price"));
     }

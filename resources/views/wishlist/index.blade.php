@@ -42,7 +42,7 @@
          
            <div class="mb-3">
                <i class="fa-solid fa-star" style="color: yellow;"></i>
-               <p class="card-text d-inline text-secondary">4.9 | Terjual 5.9K</p>
+               <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 1) }} | Terjual 5.9K</p>
            </div>
 
            <div class="row">

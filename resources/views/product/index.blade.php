@@ -37,10 +37,10 @@
             <div class="row">
                 <p class="d-inline col-sm-auto">Sold 100+</p>
                 <div class="d-inline col-sm-auto">
-                    <i class="fa-solid fa-star" style="color: yellow;"></i> 5
-                    <p class="d-inline">(200 rating)</p>
+                    <i class="fa-solid fa-star" style="color: yellow;"></i> {{ round($product->getAvgRating(), 1) }}
+                    <p class="d-inline">({{ $product->user_rating->count() }} rating)</p>
                 </div>
-                <p class="d-inline col-sm-auto">Review (14)</p>
+                <p class="d-inline col-sm-auto">Discussion (14)</p>
             </div>
             <h3 class="fw-bold product-price currency d-inline">{{ $product->price }}</h3>
             <hr>
