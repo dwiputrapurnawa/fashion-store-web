@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+
         return view('home.index', [
-            "products" => Product::latest()->paginate(8)->withQueryString(),
+            "products" => Product::latest()->filter($request->query("search"))->paginate(8)->withQueryString(),
             "categories" => Category::all(),
         ]);
     }

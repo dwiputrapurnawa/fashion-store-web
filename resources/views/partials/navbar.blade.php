@@ -23,10 +23,10 @@
           <a class="nav-link custom-highlight" aria-current="page" href="/">Deals</a>
         </li>
 
-        <form class="d-flex mx-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn custom-btn-outline" type="submit">Search</button>
-        </form>
+        <div class="d-flex mx-3">
+          <input class="form-control me-2" type="search" placeholder="Search" name="search" value="{{ request('search') }}" aria-label="Search">
+          <button class="btn custom-btn-outline" type="button" id="search-button">Search</button>
+        </div>
       </ul>
      
     </div>

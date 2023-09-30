@@ -120,4 +120,20 @@ $(function() {
             location.replace(location.href.split('#')[0]);
         })
     });
+
+    $("#search-button").on("click", function() {
+        const searchValue = $("input[name='search']").val();
+
+        window.location.href = window.location.href + "?search=" + searchValue + "#product-list"
+
+    });
+
+    $("input[name='search']").keydown(function(e) {
+        
+        if(e.keyCode == 13) {
+            e.preventDefault();
+            $("#search-button").click();
+        }
+
+    })
 })

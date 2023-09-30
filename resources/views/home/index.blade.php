@@ -25,7 +25,7 @@
    </div>
 
    
-   <div class="row">
+   <div class="row" id="product-list">
    @foreach ($products as $product)
     <div class="col-lg-auto card product-item m-3" style="width: 18rem;">
         <a href="/product/{{ $product->slug }}">

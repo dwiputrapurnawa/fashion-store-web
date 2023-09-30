@@ -22,4 +22,8 @@ class Product extends Model
     public function user_wishlist() {
         return $this->belongsToMany(User::class, "wishlists")->withPivot("id");
     }
+
+    public function scopeFilter($query, $filter) {
+        return $query->where("name", "like", "%" . $filter . "%");
+    }
 }
