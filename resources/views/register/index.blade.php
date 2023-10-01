@@ -14,12 +14,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="form-signin w-100 m-auto">
+    <main class="form-signin m-auto rounded">
 
 
         <form action="/register" method="POST">
             @csrf
-          <h1 class="h3 mb-3 fw-normal">Register</h1>
+          <h1 class="h3 mb-3 fw-bold text-center">Create account</h1>
       
           <div class="form-floating">
             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" name="email" required>
@@ -46,9 +46,9 @@
             <label for="password">Password</label>
           </div>
 
-          <button class="btn custom-btn w-100 py-2" type="submit">Register</button>
+          <button class="btn custom-btn w-100 py-2 mt-3" type="submit">Register</button>
 
-          <p class="mt-3">Already have account? <a href="/login">Login here!</a></p>
+          <p class="mt-3">Already have account? <a class="text-decoration-none custom-text-color" href="/login">Login here!</a></p>
 
           <p class="mt-5 mb-3 text-body-secondary copyright"></p>
         </form>

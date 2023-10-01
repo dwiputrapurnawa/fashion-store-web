@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <main class="form-signin w-100 m-auto">
+    <main class="form-signin m-auto rounded">
 
       @if (session()->has("success"))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,7 +32,7 @@
 
         <form action="/login" method="POST">
           @csrf
-          <h1 class="h3 mb-3 fw-normal">Login</h1>
+          <h1 class="h3 mb-3 fw-bold text-center">Login</h1>
       
           <div class="form-floating">
             <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
@@ -42,17 +42,25 @@
             <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
             <label for="password">Password</label>
           </div>
-      
-          <div class="form-check text-start my-3">
-            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Remember me
-            </label>
+
+          <div class="row my-3">
+            <div class="col-sm-auto">
+              <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Remember me
+              </label>
+            </div>
+  
+            <div class="mb-3 col-sm">
+              <a class="text-decoration-none custom-text-color float-end" href="#">Forget password?</a>
+            </div>
           </div>
+      
+          
 
           <button class="btn custom-btn w-100 py-2" type="submit">Login</button>
 
-          <p class="mt-3">Not have account? <a href="/register">Register here!</a></p>
+          <p class="mt-3">Not have account? <a class="text-decoration-none custom-text-color" href="/register">Register here!</a></p>
 
           <p class="mt-5 mb-3 text-body-secondary copyright"></p>
         </form>
