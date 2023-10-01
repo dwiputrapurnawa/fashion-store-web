@@ -45,8 +45,8 @@
 
           <div class="row my-3">
             <div class="col-sm-auto">
-              <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" id="rememberme" name="rememberme">
+              <label class="form-check-label" for="rememberme">
                 Remember me
               </label>
             </div>
