@@ -31,25 +31,32 @@
    <div class="deals-container" id="deals">
     <h5 class="title-background">Deals</h5>
 
+
     <div class="owl-carousel owl-theme row">
-      @foreach ($productDeals as $product)
+      @foreach ($productDeals as $productDeal)
       <div class="col-sm-auto card product-item m-3">
-        <a href="/product/{{ $product->slug }}">
+        <a href="/product/{{ $productDeal->product->slug }}">
           <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="card-img-top" alt="card-img">
         </a>
         <div class="card-body">
-          <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-          <p class="card-text currency">{{ $product->price }}</p>
+          <a class="text-decoration-none text-dark" href="/product/{{ $productDeal->product->slug }}"><h5 class="card-title">{{ Str::ucfirst($productDeal->product->name) }}</h5></a>
+          <p class="card-text currency">{{ $productDeal->product->price - (($productDeal->percentage / 100) * $productDeal->product->price) }}</p>
+          
+          <div class="mb-3">
+            <span class="badge text-bg-danger">{{ $productDeal->percentage }}%</span>
+            <small class="card-text currency text-decoration-line-through">{{ $productDeal->product->price }}</small>
+          </div>
+
           
             <div class="mb-3">
                 <i class="fa-solid fa-star" style="color: yellow;"></i>
-                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 2) }} | Terjual 5.9K</p>
+                <p class="card-text d-inline text-secondary">{{ round($productDeal->product->getAvgRating(), 2) }} | Terjual 5.9K</p>
             </div>
   
           <form action="/cart" method="post">
             @csrf
             <input type="hidden" name="quantity" value="1">
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="product_id" value="{{ $productDeal->product->id }}">
             <button type="submit" class="btn custom-btn w-100">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
           </form>
   
@@ -76,7 +83,14 @@
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-          <p class="card-text currency">{{ $product->price }}</p>
+          <p class="card-text currency">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</p>
+
+          @if ($product->discount)
+            <div class="mb-3">
+              <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
+              <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+            </div>
+          @endif
           
             <div class="mb-3">
                 <i class="fa-solid fa-star" style="color: yellow;"></i>

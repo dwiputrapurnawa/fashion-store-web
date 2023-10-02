@@ -32,6 +32,10 @@ class Product extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function discount() {
+        return $this->hasOne(Discount::class);
+    }
+
     public function getAvgRating() {
         return $this->user_rating()->avg("value");
     }
