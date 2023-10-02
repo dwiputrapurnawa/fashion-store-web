@@ -109,7 +109,7 @@
     </div>
 
     <div class="col-lg-auto">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 22rem;">
             <div class="card-body">
               <h5 class="card-title">Shopping Summary</h5>
               <hr>

@@ -138,9 +138,7 @@ $(function() {
     });
 
     $('.owl-carousel').owlCarousel({
-        loop:true,
         margin:10,
-        autoHeight: true,
         responsiveClass:true,
         responsive:{
             0:{

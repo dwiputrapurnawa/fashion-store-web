@@ -28,6 +28,10 @@ class Product extends Model
         return $this->belongsToMany(User::class, "ratings")->withPivot("value");
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getAvgRating() {
         return $this->user_rating()->avg("value");
     }

@@ -2,6 +2,10 @@ html * {
     font-family: 'Montserrat', sans-serif;
 }
 
+p {
+    text-align: justify;
+}
+
 .custom-btn {
     background-color: #8F5E2E;
     border-color: #8F5E2E;
@@ -143,4 +147,15 @@ input::-webkit-inner-spin-button {
 
 .deals-container {
     margin-top: 1rem;
+}
+
+.write-question {
+    border: 1px solid;
+    padding: 1rem;
+    border-radius: 20px;
+    margin: 0;
+}
+
+.comment-container {
+    text-wrap: wrap;
 }

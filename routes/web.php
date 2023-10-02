@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryPageController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductPageController;
@@ -42,3 +43,5 @@ Route::patch("/cart", [CartController::class, "update"]);
 Route::get("/wishlist", [WishlistController::class, "index"]);
 Route::post("/wishlist", [WishlistController::class, "store"]);
 Route::delete("/wishlist", [WishlistController::class, "destroy"]);
+
+Route::post("/comment", [CommentController::class, "store"]);
