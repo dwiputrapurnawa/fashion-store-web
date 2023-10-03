@@ -38,8 +38,17 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-                  <input type="hidden" name="cart_id" value="{{ $product->pivot->id }}">
-                  <p class="card-text product-price currency fw-bold">{{ $product->price }}</p>
+                  <p class="card-text product-price currency fw-bold">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</p>
+                
+
+                  @if ($product->discount)
+                    <div class="mb-3">
+                    <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
+                    <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+                    </div>
+                  
+                  @endif
+                  
                   <div class="row mb-3">
                     <p class="d-inline col-sm-auto">Total Stock: </p>
                     <p class="stock d-inline col-sm-auto">{{ $product->stock }}</p>
@@ -50,7 +59,7 @@
                     <p class="fw-bold">Subtotal</p>
                   </div>
                   <div class="col-sm-auto">
-                    <p class="currency subtotal fw-bold">{{ $product->pivot->quantity * $product->price }}</p>
+                    <p class="currency subtotal fw-bold">{{ $product->pivot->quantity * ($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price) }}</p>
                   </div>
                 </div>
 
@@ -62,7 +71,8 @@
                         </div>
                         <div class="col-sm-auto">
                             <input class="form-control" type="number" name="quantity" min="1" value="{{ $product->pivot->quantity }}" max="{{ $product->stock }}" id="quantity">
-                        </div>
+                            <input type="hidden" name="cart_id" value="{{ $product->pivot->id }}">
+                          </div>
                         <div class="col-sm-auto">
                             <button class="btn custom-btn plus-cart-button" type="button"><i class="fa-solid fa-plus"></i></button>
                         </div>
@@ -90,7 +100,7 @@
                     <form action="/cart" method="POST">
                       @csrf
                       @method("delete")
-                      <input type="hidden" name="cart_id" value="{{ $product->pivot->id }}">
+                      <input type="hidden" name="selected_cart_id" value="{{ $product->pivot->id }}">
                       <div class="modal-body">
                         Are you sure delete this item from your cart?
                       </div>

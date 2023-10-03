@@ -58,6 +58,29 @@ class User extends Authenticatable
     }
 
     public function getTotalPrice() {
-        return $this->product_cart()->sum(DB::raw("quantity * price"));
+
+
+        $discountPrice = collect([]);
+
+        $discountProduct = $this->product_cart->filter(function($item) {
+            return $item->discount;
+        });
+
+        $notDiscountProduct = $this->product_cart->filter(function($item){
+            return !$item->discount;
+        });
+
+
+        foreach($discountProduct as $product) {
+          $discountPrice->push($product->pivot->quantity * ($product->price - (($product->discount->percentage / 100) * $product->price)));
+        }
+
+        $notDiscountSumPrice =  $notDiscountProduct->sum(function($item) {
+            return $item->pivot->quantity * $item->price;
+        });
+
+        $discountSumPrice = $discountPrice->sum();
+
+        return $discountSumPrice + $notDiscountSumPrice;
     }
 }

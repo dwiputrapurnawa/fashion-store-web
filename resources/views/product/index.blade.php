@@ -43,7 +43,14 @@
                 </div>
                 <p class="d-inline col-sm-auto">Discussion (14)</p>
             </div>
-            <h3 class="fw-bold product-price currency d-inline">{{ $product->price }}</h3>
+            <h3 class="fw-bold product-price currency d-inline">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h3>
+
+            @if ($product->discount)
+                <div class="mb-3">
+                <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
+                <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+                </div>
+            @endif
             <hr>
 
             <p class="text-wrap">{{ $product->description }}</p>
@@ -78,7 +85,7 @@
                             <p>Subtotal</p>
                         </div>
                         <div class="col-sm-auto">
-                            <h5 class="fw-bold subtotal currency">{{ $product->price }}</h5>
+                            <h5 class="fw-bold subtotal currency">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h5>
                         </div>
                     </div>
                     <button class="btn custom-btn w-100" type="submit">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
@@ -155,7 +162,7 @@
                         <div class="col-sm">
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="content" style="height: 60px"></textarea>
-                                <label for="comment">Comment</label>
+                                <label for="comment">Comments</label>
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                             </div>

@@ -35,10 +35,10 @@ class CartController extends Controller
 
     public function destroy(Request $request) {
         $validatedData = $request->validate([
-            "cart_id" => "required"
+            "selected_cart_id" => "required"
         ]);
 
-        Cart::where("id", $validatedData["cart_id"])->delete();
+        Cart::where("id", $validatedData["selected_cart_id"])->delete();
 
         return back()->with("message", "Successfully deleted item in the cart!");
     }
