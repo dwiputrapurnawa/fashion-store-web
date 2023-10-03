@@ -11,6 +11,7 @@ use App\Models\Discount;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Rating;
+use App\Models\Review;
 use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
 
@@ -32,9 +33,10 @@ class DatabaseSeeder extends Seeder
         Product::factory(20)->create();
         Category::factory(3)->create();
         Wishlist::factory(10)->create();
-        Rating::factory(50)->create();
+        // Rating::factory(20)->create();
         Comment::factory(100)->create();
         Discount::factory(5)->create();
+        // Review::factory(20)->create();
         // Cart::factory(20)->create();
     }
 }

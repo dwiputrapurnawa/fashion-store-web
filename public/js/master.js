@@ -165,5 +165,17 @@ $(function() {
                 height: "30px"
             })
         });
-    })
+    });
+
+    $("#cancelComment").on("click", function() {
+        $("textarea[name='content']").val("");
+    });
+
+    $("#comment").on("change", function() {
+        if($(this).val() == "") {
+            $("#cancelComment").prop("disabled", true);
+        } else {
+            $("#cancelComment").prop("disabled", false);
+        }
+    });
 })

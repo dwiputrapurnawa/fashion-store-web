@@ -35,10 +35,10 @@
             <div class="row">
                 <p class="d-inline col-sm-auto">Sold 100+</p>
                 <div class="d-inline col-sm-auto">
-                    <i class="fa-solid fa-star" style="color: yellow;"></i> {{ round($product->getAvgRating(), 1) }}
+                    <i class="fa-solid fa-star" style="color: #ffc800;"></i> {{ round($product->getAvgRating(), 1) }}
                     <p class="d-inline">({{ $product->user_rating->count() }} rating)</p>
                 </div>
-                <p class="d-inline col-sm-auto">Discussion (14)</p>
+                <p class="d-inline col-sm-auto">Discussion ({{ $product->comments->count() }})</p>
             </div>
             <h3 class="fw-bold product-price currency d-inline">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h3>
 
@@ -125,24 +125,54 @@
     <div class="row">
         
         <div class="col-lg">
-            <h5 class="fw-bold">Review (13)</h5>
+            <h5 class="fw-bold mb-3">Review ({{ $product->reviews->count() }})</h5>
+
+            <div class="bg-light p-3">
+
+                @foreach ($product->reviews as $review)
+                <div class="bg-white p-3 mb-3">
+                    <h6>{{ $review->user->name }}</h6>
+                    <div class="row mb-3">
+                       <div class="col-sm-auto">
+                        <small>{{ $review->created_at->diffForHumans() }}</small>
+                       </div>
+
+                       <div class="col-sm"> 
+
+                            @for ($i = 0; $i < $review->rating->value; $i++)
+                                <i class="fa-solid fa-star" style="color: #ffc800;"></i>
+                            @endfor
+
+                            @for ($i = 0; $i < (5-$review->rating->value); $i++)
+                            <i class="fa-regular fa-star" style="color: #ffc800;"></i>
+                            @endfor
+                        
+                       </div>
+                    </div>
+                  
+                    <p>{{ $review->content }}</p>
+                </div>
+                @endforeach
+
+            </div>
+
         </div>
 
         <div class="col-lg row mt-3 mb-3 m-auto">
-            <h5 class="fw-bold">Discussion (13)</h5>
+            <h5 class="fw-bold">Discussion ({{ $product->comments->count() }})</h5>
     
             <p class="text-secondary">{{ $product->name }}</p>
     
             <div class="mb-3 write-question row">
-                <div class="col-sm-auto p-2">
+                <div class="col-sm-auto p-2 m-auto">
                     <i class="fa-brands fa-rocketchat fa-xl"></i>
                 </div>
                 
                 <div class="col-sm p-2">
-                    <p>Ada pertanyaan? Diskusikan dengan penjual atau pengguna lain</p>
+                    <p class="m-auto">Ada pertanyaan? Diskusikan dengan penjual atau pengguna lain</p>
                 </div>
                 <div class="col-sm-auto p-2">
-                    <a class="btn custom-btn float-end" href="#comment">Tulis Pertanyaan</a>
+                    <a class="btn custom-btn float-end m-auto" href="#comment">Tulis Pertanyaan</a>
                 </div>
             </div>
     
@@ -231,9 +261,18 @@
     
             <form action="/comment" method="post" class="my-3">
                 @csrf
-                    <textarea class="form-control" placeholder="Leave a comment here..." id="comment" name="content" style="height: 30px"></textarea>
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <button class="btn custom-btn my-3 float-end" type="submit">Comment</button>
+                <textarea class="form-control" placeholder="Leave a comment here..." id="comment" name="content" style="height: 30px"></textarea>
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                <div class="row float-end">
+                    <div class="col-sm">
+                        <button class="btn custom-btn-outline my-3" type="button" id="cancelComment" disabled>Cancel</button>
+                    </div>
+                    <div class="col-sm">
+                        <button class="btn custom-btn my-3" type="submit">Comment</button>
+                    </div>
+                </div>
+                
             </form>
         </div>
     </div>

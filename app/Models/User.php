@@ -57,6 +57,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, "ratings")->withPivot("value");
     }
 
+    public function review() {
+        return $this->hasOne(Review::class);
+    }
+
+    public function rating() {
+        return $this->hasOne(Rating::class);
+    }
+
     public function getTotalPrice() {
 
 

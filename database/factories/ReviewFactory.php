@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Rating>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
  */
-class RatingFactory extends Factory
+class ReviewFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,8 @@ class RatingFactory extends Factory
         return [
             "user_id" => fake()->numberBetween(1, 10),
             "product_id" => fake()->numberBetween(1, 20),
-            "review_id" => 1,
-            "value" => fake()->numberBetween(1, 5)
+            "rating_id" => fake()->numberBetween(1, 20),
+            "content" => fake()->paragraph(),
         ];
     }
 }
