@@ -159,3 +159,7 @@ input::-webkit-inner-spin-button {
 .comment-container {
     text-wrap: wrap;
 }
+
+.text-custom-color {
+    color: #8F5E2E;
+}

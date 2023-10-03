@@ -120,39 +120,48 @@
 
     </div>
 
-    <hr>
 
-    <div class="row">
+    <div class="row mt-5">
         
         <div class="col-lg">
             <h5 class="fw-bold mb-3">Review ({{ $product->reviews->count() }})</h5>
 
             <div class="bg-light p-3">
 
-                @foreach ($product->reviews as $review)
-                <div class="bg-white p-3 mb-3">
-                    <h6>{{ $review->user->name }}</h6>
-                    <div class="row mb-3">
-                       <div class="col-sm-auto">
-                        <small>{{ $review->created_at->diffForHumans() }}</small>
-                       </div>
-
-                       <div class="col-sm"> 
-
-                            @for ($i = 0; $i < $review->rating->value; $i++)
-                                <i class="fa-solid fa-star" style="color: #ffc800;"></i>
-                            @endfor
-
-                            @for ($i = 0; $i < (5-$review->rating->value); $i++)
-                            <i class="fa-regular fa-star" style="color: #ffc800;"></i>
-                            @endfor
-                        
-                       </div>
+                @if ($product->reviews->isEmpty())
+                    <div class="p-3">
+                        <h5>There are <span class="text-custom-color d-inline-block fw-bold">no reviews</span> for this product yet.</h5>
                     </div>
-                  
-                    <p>{{ $review->content }}</p>
-                </div>
-                @endforeach
+                @else
+                    @foreach ($product->reviews as $review)
+                    <div class="bg-white p-3 mb-3">
+                        <h6>{{ $review->user->name }}</h6>
+                        <div class="row mb-3">
+                        <div class="col-sm-auto">
+                            <small>{{ $review->created_at->diffForHumans() }}</small>
+                        </div>
+
+                        <div class="col-sm"> 
+
+                                @for ($i = 0; $i < $review->rating->value; $i++)
+                                    <i class="fa-solid fa-star" style="color: #ffc800;"></i>
+                                @endfor
+
+                                @for ($i = 0; $i < (5-$review->rating->value); $i++)
+                                <i class="fa-regular fa-star" style="color: #ffc800;"></i>
+                                @endfor
+                            
+                        </div>
+                        </div>
+                    
+                        <p>{{ $review->content }}</p>
+                    </div>
+                    @endforeach
+                @endif
+
+                
+
+                
 
             </div>
 
@@ -169,91 +178,98 @@
                 </div>
                 
                 <div class="col-sm p-2">
-                    <p class="m-auto">Ada pertanyaan? Diskusikan dengan penjual atau pengguna lain</p>
+                    <p class="m-auto">Any question? Discuss with sellers or other users</p>
                 </div>
                 <div class="col-sm-auto p-2">
-                    <a class="btn custom-btn float-end m-auto" href="#comment">Tulis Pertanyaan</a>
+                    <a class="btn custom-btn float-end m-auto" href="#comment">Write a Question</a>
                 </div>
             </div>
     
             <div class="comment-container mb-3 bg-light p-3">
                 
-                @foreach ($product->comments->filter(fn($item) => $item->parent_id === 0 ) as $comment)
-                <div class="bg-white p-3 rounded mb-3">
-                    
-                    <div class="row">
-                        <div class="col-lg">
-                            <p>{{ $comment->user->name }}</p>
+                @if ($product->comments->isEmpty())
+                <div class="p-3">
+                    <h5>There are <span class="text-custom-color d-inline-block fw-bold">no comments</span> for this product yet</h5>
+                    <h5>Be the first comment.</h5>
+                </div>
+                @else
+                    @foreach ($product->comments->filter(fn($item) => $item->parent_id === 0 ) as $comment)
+                    <div class="bg-white p-3 rounded mb-3">
+                        
+                        <div class="row">
+                            <div class="col-lg">
+                                <p>{{ $comment->user->name }}</p>
+                            </div>
+
+                            @auth
+                                @if (auth()->user()->email === $comment->user->email)
+                                <div class="col-lg">
+                                    <div class="dropdown">
+                                        <button class="btn float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i data-feather="more-vertical" style="color: #8F5E2E"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                        <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->id }}">Delete</button>
+                                        </ul>
+                                    </div>
+        
+        
+                                    <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="/comment" method="post">
+                                                @csrf
+                                                @method("delete")
+                                                <div class="modal-body">
+                                                    <p>Are you sure ?</p>
+                                                    <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">No</button>
+                                                    <button type="submit" class="btn custom-btn">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                @endif
+                            @endauth
+
+
                         </div>
 
-                        @auth
-                            @if (auth()->user()->email === $comment->user->email)
-                            <div class="col-lg">
-                                <div class="dropdown">
-                                    <button class="btn float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i data-feather="more-vertical" style="color: #8F5E2E"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->id }}">Delete</button>
-                                    </ul>
-                                  </div>
-    
-    
-                                  <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form action="/comment" method="post">
-                                            @csrf
-                                            @method("delete")
-                                            <div class="modal-body">
-                                                <p>Are you sure ?</p>
-                                                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">No</button>
-                                                <button type="submit" class="btn custom-btn">Yes</button>
-                                              </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
-    
+                        
+
+                        <small class="text-body-secondary">{{ $comment->created_at->diffForHumans() }}</small>
+                        <p class="mt-3">{{ $comment->content }}</p>
+
+                        <hr>
+
+                        <form action="/comment" method="post" class="my-3 row">
+                            @csrf
+                            <div class="col-sm m-auto">
+                                <textarea class="form-control" placeholder="Leave a comment here..." name="content" style="height: 30px"></textarea>
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                             </div>
-                            @endif
-                        @endauth
-
-
+                            <div class="col-sm-auto">
+                                <button class="btn custom-btn my-3" type="submit">Comment</button>
+                            </div>
+                        </form>
                     </div>
 
-                    
+                        @if (!$comment->reply->isEmpty())
+                            @include('partials.comment', ["comments" => $comment->reply, "parent_id" => $comment->id, "marginLeft" => 1])
+                        @endif
 
-                    <small class="text-body-secondary">{{ $comment->created_at->diffForHumans() }}</small>
-                    <p class="mt-3">{{ $comment->content }}</p>
-
-                    <hr>
-
-                    <form action="/comment" method="post" class="my-3 row">
-                        @csrf
-                        <div class="col-sm m-auto">
-                            <textarea class="form-control" placeholder="Leave a comment here..." name="content" style="height: 30px"></textarea>
-                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                        </div>
-                        <div class="col-sm-auto">
-                            <button class="btn custom-btn my-3" type="submit">Comment</button>
-                        </div>
-                    </form>
-                </div>
-
-                    @if (!$comment->reply->isEmpty())
-                        @include('partials.comment', ["comments" => $comment->reply, "parent_id" => $comment->id, "marginLeft" => 1])
-                    @endif
-
-                @endforeach
+                    @endforeach
+                @endif
 
                 
     
