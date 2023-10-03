@@ -45,3 +45,4 @@ Route::post("/wishlist", [WishlistController::class, "store"]);
 Route::delete("/wishlist", [WishlistController::class, "destroy"]);
 
 Route::post("/comment", [CommentController::class, "store"]);
+Route::delete("/comment", [CommentController::class, "destroy"]);

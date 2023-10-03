@@ -24,12 +24,9 @@
 
         <div class="col-lg">
             <img class="img-fluid mb-2 img-view img-thumbnail" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
-            
-            <div class="owl-carousel owl-theme d-inline">
-                <img class="item img-fluid mb-2 img-item" src="https://storage.sg.content-cdn.io/cdn-cgi/image/%7Bwidth%7D,%7Bheight%7D,quality=75,format=auto/in-resources/ff5c6da1-2d74-4846-96c9-ccd65d766244/Images/ProductImages/Source/Levis-Mens-Relaxed-Fit-Graphic-Zip-Up-Hoodie-387170020_01_Front.jpg">
-                <img class="item img-fluid mb-2 img-item" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
-                <img class="item img-fluid mb-2 img-item" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
-                <img class="item img-fluid mb-2 img-item" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
+            <div class="img-list">
+                <img class="img-fluid img-thumbnail mb-2 img-item" src="https://storage.sg.content-cdn.io/cdn-cgi/image/%7Bwidth%7D,%7Bheight%7D,quality=75,format=auto/in-resources/ff5c6da1-2d74-4846-96c9-ccd65d766244/Images/ProductImages/Source/Levis-Mens-Relaxed-Fit-Graphic-Zip-Up-Hoodie-387170020_01_Front.jpg">
+                <img class="img-fluid img-thumbnail mb-2 img-item" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
             </div>
         </div>
 
@@ -141,10 +138,10 @@
                     <i class="fa-brands fa-rocketchat fa-xl"></i>
                 </div>
                 
-                <div class="col-sm-auto p-2">
+                <div class="col-sm p-2">
                     <p>Ada pertanyaan? Diskusikan dengan penjual atau pengguna lain</p>
                 </div>
-                <div class="col-sm p-2">
+                <div class="col-sm-auto p-2">
                     <a class="btn custom-btn float-end" href="#comment">Tulis Pertanyaan</a>
                 </div>
             </div>
@@ -153,19 +150,68 @@
                 
                 @foreach ($product->comments->filter(fn($item) => $item->parent_id === 0 ) as $comment)
                 <div class="bg-white p-3 rounded mb-3">
-                    <p>{{ $comment->user->name }}</p>
+                    
+                    <div class="row">
+                        <div class="col-lg">
+                            <p>{{ $comment->user->name }}</p>
+                        </div>
+
+                        @auth
+                            @if (auth()->user()->email === $comment->user->email)
+                            <div class="col-lg">
+                                <div class="dropdown">
+                                    <button class="btn float-end" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i data-feather="more-vertical" style="color: #8F5E2E"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $comment->id }}">Delete</button>
+                                    </ul>
+                                  </div>
+    
+    
+                                  <div class="modal fade" id="deleteModal{{ $comment->id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="/comment" method="post">
+                                            @csrf
+                                            @method("delete")
+                                            <div class="modal-body">
+                                                <p>Are you sure ?</p>
+                                                <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">No</button>
+                                                <button type="submit" class="btn custom-btn">Yes</button>
+                                              </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+    
+                            </div>
+                            @endif
+                        @endauth
+
+
+                    </div>
+
+                    
+
                     <small class="text-body-secondary">{{ $comment->created_at->diffForHumans() }}</small>
                     <p class="mt-3">{{ $comment->content }}</p>
 
+                    <hr>
+
                     <form action="/comment" method="post" class="my-3 row">
                         @csrf
-                        <div class="col-sm">
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="content" style="height: 60px"></textarea>
-                                <label for="comment">Comments</label>
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-                            </div>
+                        <div class="col-sm m-auto">
+                            <textarea class="form-control" placeholder="Leave a comment here..." name="content" style="height: 30px"></textarea>
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
                         </div>
                         <div class="col-sm-auto">
                             <button class="btn custom-btn my-3" type="submit">Comment</button>
@@ -185,11 +231,8 @@
     
             <form action="/comment" method="post" class="my-3">
                 @csrf
-                <div class="form-floating">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="content" style="height: 100px"></textarea>
-                    <label for="comment">Comments</label>
+                    <textarea class="form-control" placeholder="Leave a comment here..." id="comment" name="content" style="height: 30px"></textarea>
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                </div>
                 <button class="btn custom-btn my-3 float-end" type="submit">Comment</button>
             </form>
         </div>

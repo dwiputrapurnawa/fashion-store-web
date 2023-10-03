@@ -151,5 +151,19 @@ $(function() {
                 items:4,
             }
         }
-    })      
+    });
+    
+    $("textarea[name='content']").each(function() {
+        $(this).focus(function() {
+            $(this).animate({
+                height: "100px"
+            })
+        });
+
+        $(this).focusout(function() {
+            $(this).animate({
+                height: "30px"
+            })
+        });
+    })
 })

@@ -27,4 +27,14 @@ class CommentController extends Controller
 
         return back()->with("message", "successfully add new comment");
     }
+
+    public function destroy(Request $request) {
+        $validatedData = $request->validate([
+            "comment_id" => "required"
+        ]);
+
+        Comment::where("id", $validatedData)->delete();
+
+        return back()->with("message", "successfully delete the comment");
+    }
 }
