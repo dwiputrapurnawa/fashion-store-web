@@ -33,8 +33,6 @@
   <div class="row">
   
     <div class="col-lg">
-      <h3>Cart</h3>
-      <hr>
         @foreach ($products as $product)
           <div class="card mb-3" id="card" style="width: 55rem">
             <div class="row g-0">
