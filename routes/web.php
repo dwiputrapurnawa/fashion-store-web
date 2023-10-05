@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryPageController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductPageController;
@@ -46,3 +47,5 @@ Route::delete("/wishlist", [WishlistController::class, "destroy"]);
 
 Route::post("/comment", [CommentController::class, "store"]);
 Route::delete("/comment", [CommentController::class, "destroy"]);
+
+Route::get("/coupon", [CouponController::class, "checkCoupon"]);

@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-lg">
-            <h5 class="fw-bold">{{ $product->name }}</h5>
+            <h5>{{ $product->name }}</h5>
             <div class="row">
                 <p class="d-inline col-sm-auto">Sold 100+</p>
                 <div class="d-inline col-sm-auto">

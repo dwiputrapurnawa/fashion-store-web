@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-white bg-white">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img class="img-fluid" src="/images/logo.png" alt="logo" style="width: 200px">
+      <h2 class="fw-bold" style="color: #8F5E2E">Fashion Store</h2>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -22,7 +22,7 @@
         </div>
 
         <li class="nav-item">
-          <a class="nav-link custom-highlight" aria-current="page" href="#deals">Deals</a>
+          <a class="nav-link custom-highlight" aria-current="page" href="/#deals">Deals</a>
         </li>
 
         <div class="d-flex mx-3">

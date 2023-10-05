@@ -178,4 +178,74 @@ $(function() {
             $("#cancelComment").prop("disabled", false);
         }
     });
+
+    $("#shipping").on("change", function(e) {
+        const value = e.target.value;
+        const totalPrice = $(".total-price").html();
+        const totalPriceNumber = Number(totalPrice.replace(/[^0-9.-]+/g,""));
+        var totalPriceCalculate = totalPriceNumber + Number(value);
+
+        $(".shipping-price-container").removeClass("d-none")
+
+        $(".shipping-price").html(formatter.format(value))
+
+        $(".total-price-checkout").html(formatter.format(totalPriceCalculate))
+        
+    });
+
+        $(".reedem-btn").on("click", async function() {
+            const couponCode = $("input[name='coupon']").val();
+
+            if(couponCode == "") {
+                $(".coupon-container").addClass("d-none")
+            } else {
+                $(".coupon-container").removeClass("d-none")
+
+                const url = "/coupon?coupon=" + couponCode;
+        
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+        
+                const data = await response.json();
+
+                if(data.data) {
+                    const couponData = data.data;
+                    const totalPriceItem = $(".total-price-items").html()
+                    const totalPriceItemNumber = Number(totalPriceItem.replace(/[^0-9.-]+/g,""));
+                    const shippingPrice = $(".shipping-price").html()
+                    const shippingPriceNumber = Number(shippingPrice.replace(/[^0-9.-]+/g,""));
+                    var totalPrice = totalPriceItemNumber - couponData.discount + shippingPriceNumber;
+
+                    $(".total-price").html(formatter.format(totalPrice))
+                    $(".coupon-code").html(couponCode);
+                    $(".coupon-discount").html(formatter.format(couponData.discount));
+                    $(".coupon-discount-checkout").html(formatter.format(couponData.discount));
+                    $(".total-price-checkout").html(formatter.format(totalPrice))
+        
+                    console.log(couponData);
+                } else {
+                    $(".coupon-container").addClass("d-none")
+                }
+
+                
+            }
+            
+        });
+
+    
+
+    
+   
+    const totalPriceItem = $(".total-price-items").html();
+
+    $(".total-price").html(totalPriceItem)
+
+    const totalPrice = $(".total-price").html();
+
+    $(".total-price-checkout").html(totalPrice);
+    $(".total-price-items-checkout").html(totalPriceItem);
 })

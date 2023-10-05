@@ -19,7 +19,7 @@ class RatingFactory extends Factory
         return [
             "user_id" => fake()->numberBetween(1, 10),
             "product_id" => fake()->numberBetween(1, 20),
-            "review_id" => 1,
+            "review_id" => fake()->numberBetween(1, 20),
             "value" => fake()->numberBetween(1, 5)
         ];
     }
