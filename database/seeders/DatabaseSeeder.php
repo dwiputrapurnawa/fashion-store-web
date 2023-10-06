@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Coupon;
 use App\Models\Discount;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Rating;
@@ -30,8 +31,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory(10)->create();
-        Product::factory(20)->create();
+        $users = User::factory(10)->create();
+        $products = Product::factory(20)->create();
         Category::factory(3)->create();
         Wishlist::factory(10)->create();
         // Rating::factory(20)->create();
@@ -40,5 +41,6 @@ class DatabaseSeeder extends Seeder
         // Review::factory(20)->create();
         // Cart::factory(20)->create();
         Coupon::factory(10)->create();
+        Order::factory(20)->hasAttached($products, ["quantity" => 5, "price" => 50000])->create();
     }
 }

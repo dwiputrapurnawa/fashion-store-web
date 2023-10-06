@@ -65,6 +65,10 @@ class User extends Authenticatable
         return $this->hasOne(Rating::class);
     }
 
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
     public function getTotalPrice() {
 
 

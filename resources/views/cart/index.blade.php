@@ -187,7 +187,6 @@
                        <div class="mb-3 border p-3 rounded">
                         <h5>Shipping address</h5>
                         <p>{{ auth()->user()->address }}</p>
-                        <button class="btn custom-btn">Choose another address</button>
 
                        </div>
 
@@ -200,6 +199,35 @@
                           <option value="40000">J&T</option>
                           <option value="98000">Paxel</option>
                         </select>
+                       </div>
+
+                       <div class="mb-4 border p-3">
+                        <h5>Payment</h5>
+                        <p>Pay using credit cards</p>
+                        <img class="img-fluid mb-3" width="80px" src="/images/mastercard-visa.png" alt="mastercard-visa">
+
+                        <form action="">
+                          <div class="mb-3">
+                            <label for="credit-card" class="form-label">Credit Card</label>
+                            <input class="form-control" type="text" name="creditCard" placeholder="4312 XXXX XXXX XXXX">
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input class="form-control" type="text" name="name" id="name" placeholder="John Doe">
+                          </div>
+
+                          <div class="row">
+                            <div class="col-lg mb-3">
+                              <label for="exp-date" class="form-label">Expiration Date</label>
+                              <input class="form-control" type="text" name="expDate" id="exp-date" placeholder="11/24">
+                            </div>
+                            <div class="col-lg mb-3">
+                              <label for="cvv" class="form-label">CVV</label>
+                              <input class="form-control" type="text" name="cvv" id="cvv">
+                            </div>
+                          </div>
+                        </form>
                        </div>
 
                        @foreach ($products as $product)
@@ -230,6 +258,7 @@
                           
                         </div>
                        @endforeach
+
 
                        <div class="mb-3 title-background m-auto">
 
@@ -271,6 +300,8 @@
 
                        </div>
 
+
+                       
 
                       </div>
 
