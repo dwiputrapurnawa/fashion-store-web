@@ -65,13 +65,16 @@
                             <i class="fa-solid fa-bag-shopping"></i>
                         </div>
                         <div class="col-lg-auto">
-                            Shopping
+                            <p>Shopping</p>
                         </div>
                         <div class="col-lg-auto">
-                            {{ $order->created_at->format("d F Y") }}
+                            <p>{{ $order->created_at->format("d F Y") }}</p>
                         </div>
                         <div class="col-lg-auto">
                             <span class="badge rounded-pill text-bg-warning">Waiting</span>
+                        </div>
+                        <div class="col-lg-auto">
+                            <p>INV/{{ $order->invoice_number }}</p>
                         </div>
                       </div>
                       
@@ -83,7 +86,7 @@
                                 </div>
                                 <div class="col-lg">
                                     <h5 class="m-3 fw-bold">{{ $product->name }}</h5>
-                                    <p class="m-3">{{ $product->pivot->quantity }} items x <span class="currency">{{ $product->pivot->price }}</span></p>
+                                    <p class="m-3">{{ $product->pivot->quantity }} items x <span class="currency">{{ $product->pivot->price_per_unit }}</span></p>
                                 </div>
                             </div>
                         </div>
@@ -91,13 +94,147 @@
     
                         <div class="col-lg-auto p-3">
                             <p class="text-secondary">Total Price</p>
-                            <h5 class="fw-bold currency">{{ $product->pivot->quantity * $product->pivot->price }}</h5>
+                            <h5 class="fw-bold currency">{{ $product->pivot->quantity * $product->pivot->price_per_unit }}</h5>
+                            <button class="btn custom-btn mt-2" type="button" data-bs-toggle="modal" data-bs-target="#detailTransaction{{ $order->id }}">Detail Transaction</button>
                         </div>
                       </div>
     
                     </div>
                   </div>
                 @endforeach
+
+                <div class="modal fade" id="detailTransaction{{ $order->id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Transaction</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="mb-3 border rounded">
+                                <div class="title-background">
+                                    <h5>Status</h5>
+                                </div>
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Invoice</p>
+                                    </div>
+                                    <div class="col-lg">
+                                        <p>INV/{{ $order->invoice_number }}</p>
+                                    </div>
+                                </div>
+        
+                                  <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Order Status</p>
+                                    </div>
+                                    <div class="col-lg">
+                                        <p>{{ Str::ucfirst($order->order_status) }}</p>
+                                    </div>
+                                  </div>
+        
+                            </div>
+
+                            <div class="mb-3 border rounded">
+                                <div class="title-background">
+                                    <h5>Shipping</h5>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Tracking Number</p>
+                                    </div>
+                                    <div class="col-lg">
+                                        <p>{{ $order->tracking_number }}</p>
+                                    </div>
+                                  </div>
+                                  <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Shipping</p>
+                                    </div>
+                                    <div class="col-lg">
+                                        <p>{{ $order->shipping->name }}</p>
+                                    </div>
+                                  </div>
+        
+                                  <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Shipping Cost</p>
+                                    </div>
+                                    <div class="col-lg">
+                                        <p class="currency">{{ $order->shipping_cost }}</p>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div class="mb-3 border rounded">
+                                <div class="title-background">
+                                    <h5>Purchase Items</h5>
+                                </div>
+
+                                @foreach ($order->products as $product)
+                                    <div class="row m-3">
+                                        <div class="col-lg">
+                                            <p>{{ $product->name }}</p>
+                                        </div>
+                                        <div class="col-lg">
+                                            <p>{{ $product->pivot->quantity }}</p>
+                                        </div>
+                                        <div class="col-lg">
+                                            <p class="currency">{{ $product->pivot->price_per_unit }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div class="mb-3 border rounded">
+                                <div class="title-background">
+                                    <h5>Summary</h5>
+                                </div>
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Total Price ({{ $order->products->count() }}) items</p>
+                                    </div>
+                                    <div class="col lg">
+                                        <p class="currency">{{ $order->getTotalPriceitem() }}</p>
+                                    </div>
+                                </div>
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Coupon Discount</p>
+                                    </div>
+                                    <div class="col lg">
+                                        <p class="d-inline">-<p class="currency d-inline">{{ $order->coupon->discount }}</p></p>
+                                    </div>
+                                </div>
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <p>Shipping</p>
+                                    </div>
+                                    <div class="col lg">
+                                        <p class="currency">{{ $order->shipping_cost }}</p>
+                                    </div>
+                                </div>
+                                <div class="row m-3">
+                                    <div class="col-lg">
+                                        <h5 class="fw-bolf">Total Price</h5>
+                                    </div>
+                                    <div class="col-lg">
+                                        <h5 class="currency fw-bold">{{ $order->total_price }}</h5>
+                                    </div>
+                                  </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
             @endforeach
 
         </div>

@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\Review;
+use App\Models\Shipping;
 use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
 
@@ -41,6 +42,26 @@ class DatabaseSeeder extends Seeder
         // Review::factory(20)->create();
         // Cart::factory(20)->create();
         Coupon::factory(10)->create();
-        Order::factory(20)->hasAttached($products, ["quantity" => 5, "price" => 50000])->create();
+        Order::factory(20)->hasAttached($products, ["quantity" => 5, "price_per_unit" => 50000])->create();
+
+        Shipping::factory()->create([
+            "name" => "SiCepat"
+        ]);
+
+        Shipping::factory()->create([
+            "name" => "JNE"
+        ]);
+
+        Shipping::factory()->create([
+            "name" => "J&T"
+        ]);
+
+        Shipping::factory()->create([
+            "name" => "Wahana"
+        ]);
+
+        Shipping::factory()->create([
+            "name" => "Paxel"
+        ]);
     }
 }

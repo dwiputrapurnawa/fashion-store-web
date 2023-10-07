@@ -41,7 +41,7 @@ class Product extends Model
     }
 
     public function orders() {
-        return $this->belongsToMany(Order::class, "order_items")->withPivot("quantity", "price");
+        return $this->belongsToMany(Order::class, "order_items")->withPivot("quantity", "price_per_unit");
     }
 
     public function getAvgRating() {
