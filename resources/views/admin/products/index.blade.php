@@ -32,7 +32,7 @@
         <tr>
             <th scope="row">{{ $loop->iteration }}</th>
             <td>{{ $product->name }}</td>
-            <td class="currency">{{ $product->price }}</td>
+            <td>Rp.@money($product->price)</td>
             <td>{!! \Illuminate\Support\Str::limit($product->description, 150, $end='...') !!}</td>
             <td>{{ $product->category->name }}</td>
             <td>{{ $product->created_at->format("d F Y") }}</td>

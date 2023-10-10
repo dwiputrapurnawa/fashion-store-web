@@ -98,14 +98,6 @@ $(function() {
 
     table.rows( { selected: true, page: "current" } ).nodes();
 
-    const formatter = new Intl.NumberFormat("en-EN", {
-        style: "currency",
-        currency: "IDR"
-    });
-
-    $(".currency").each(function() {
-        $(this).html(formatter.format($(this).html()));
-    });
 
     $(".img-item").on("mouseover", function() {
         const selectedImgSrc = $(this).attr("src");
