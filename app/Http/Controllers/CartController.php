@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Shipping;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -15,6 +16,7 @@ class CartController extends Controller
         return view("cart.index", [
             "categories" => Category::all(),
             "products" => $products,
+            "shippings" => Shipping::all(),
         ]);
     }
 
@@ -47,6 +49,6 @@ class CartController extends Controller
         
         Cart::where("id", $request->cart_id)->update(["quantity" => $request->quantity]);
 
-        return response()->json(["message" => "successfully update cart"]);
+        return response()->json(["message" => "Successfully updated cart!"]);
     }
 }

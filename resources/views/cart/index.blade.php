@@ -193,11 +193,9 @@
                        <div class="mb-3 border p-3 rounded">
                         <h5>Shipping expedition</h5>
                         <select class="form-select" name="shipping" id="shipping">
-                          <option selected>Select expedition</option>
-                          <option value="34000">SiCepat</option>
-                          <option value="30000">JNE</option>
-                          <option value="40000">J&T</option>
-                          <option value="98000">Paxel</option>
+                          @foreach ($shippings as $shipping)
+                            <option value="{{ mt_rand(20000, 100000) }}">{{ $shipping->name }}</option>
+                          @endforeach
                         </select>
                        </div>
 
@@ -307,8 +305,14 @@
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn custom-btn">Checkout</button>
+
+                      <form action="/checkout" method="POST">
+                        {{-- TODO CHECKOUT FORM --}}
+                        
+                        <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn custom-btn" id="checkout-btn">Checkout</button>
+                      </form>
+                      
                     </div>
                   </div>
                 </div>

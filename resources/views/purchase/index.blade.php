@@ -19,7 +19,7 @@
         <div class="border rounded p-3">
             <div class="row">
                 <div class="col-lg-auto">
-                    <img style="width: 100px" class="img-fluid mb-3" src="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" alt="user-account">
+                    <img style="width: 100px" class="img-fluid mb-3 rounded-circle" src="{{ auth()->user()->profile_picture }}" alt="user-account">
                 </div>
                 <div class="col-lg align-items-center d-flex">
                     <p>{{ auth()->user()->name }}</p>
@@ -29,24 +29,6 @@
             <hr>
 
             <a class="btn custom-btn w-100" href="/settings">Account Setting</a>
-
-            {{-- <div class="row">
-                <div class="col-lg">
-                    
-                    <div class="row">
-                        <div class="col-lg-auto">
-                            <i class="fa-solid fa-money-bill"></i>
-                        </div>
-                        <div class="col-lg">
-                            Saldo
-                        </div>
-                    </div>
-                   
-                </div>
-                <div class="col-lg-auto">
-                    Rp.100.000
-                </div>
-            </div> --}}
         </div>
     </div>
 

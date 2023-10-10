@@ -52,11 +52,17 @@
       <li class="nav-item">
         <div class="dropdown">
           <a class="nav-link btn custom-highlight" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i data-feather="user"></i>
+            <img class="img-fluid rounded-circle" style="width: 30px" src="{{ auth()->user()->profile_picture }}" alt="profile-picture">
             {{ auth()->user()->name }}
           </a>
         
           <ul class="dropdown-menu p-2">
+            <li>
+              <a class="dropdown-item custom-highlight" href="/dashboard">Dashboard</a>
+            </li>
+
+            <li><hr class="dropdown-divider"></li>
+
             <li>
               <a class="dropdown-item custom-highlight" href="/purchase">Purchase</a>
             </li>

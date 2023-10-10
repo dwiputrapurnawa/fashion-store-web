@@ -9,6 +9,15 @@ $(function() {
         currency: "IDR"
     });
 
+    const totalPriceItem = $(".total-price-items").html();
+
+    $(".total-price").html(totalPriceItem)
+
+    const totalPrice = $(".total-price").html();
+
+    $(".total-price-checkout").html(totalPrice);
+    $(".total-price-items-checkout").html(totalPriceItem);
+
 
     $(".currency").each(function() {
         $(this).html(formatter.format($(this).html()));
@@ -237,15 +246,28 @@ $(function() {
         });
 
     
+    $("#checkout-btn").on("click", function() {
 
+        
+
+        /*
+
+
+        invoice_number
+        user_id
+        total_price
+        payment_status
+        order_status
+        shipping_id
+        tracking_number
+        shipping_cost
+        coupon_id
+
+
+        */
+
+    });
     
    
-    const totalPriceItem = $(".total-price-items").html();
 
-    $(".total-price").html(totalPriceItem)
-
-    const totalPrice = $(".total-price").html();
-
-    $(".total-price-checkout").html(totalPrice);
-    $(".total-price-items-checkout").html(totalPriceItem);
 })
