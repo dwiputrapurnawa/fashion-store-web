@@ -4,11 +4,6 @@ $(function() {
 
     const currentYear = new Date().getFullYear();
 
-    const formatter = new Intl.NumberFormat("en-EN", {
-        style: "currency",
-        currency: "IDR"
-    });
-
     const totalPriceItem = $(".total-price-items").html();
 
     $(".total-price").html(totalPriceItem)
@@ -17,11 +12,6 @@ $(function() {
 
     $(".total-price-checkout").html(totalPrice);
     $(".total-price-items-checkout").html(totalPriceItem);
-
-
-    $(".currency").each(function() {
-        $(this).html(formatter.format($(this).html()));
-    })
 
     $(".copyright").html(`&copy; ${currentYear} Fashion Store, Inc`)
 
@@ -46,11 +36,13 @@ $(function() {
 
             var price = $(".product-price").eq(index).html()
 
-            var number = Number(price.replace(/[^0-9.-]+/g,""));
+            var number = price.replace(/[^0-9.-]+/g,"");
 
-            const subtotal = number.toString() * quantityValue;
+            const subtotal = number.substring(1) * quantityValue;
+            const finalSubtotal = subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-            $(".subtotal").eq(index).html(formatter.format(subtotal));
+
+            $(".subtotal").eq(index).html("Rp. " + finalSubtotal);
 
         })
 
@@ -68,11 +60,13 @@ $(function() {
 
             var price = $(".product-price").eq(index).html()
 
-            var number = Number(price.replace(/[^0-9.-]+/g,""));
+            var number = price.replace(/[^0-9.-]+/g,"");
 
-            const subtotal = number.toString() * quantityValue;
+            const subtotal = number.substring(1) * quantityValue;
+            const finalSubtotal = subtotal.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-            $(".subtotal").eq(index).html(formatter.format(subtotal));
+
+            $(".subtotal").eq(index).html("Rp. " + finalSubtotal);
         });
     });
 
@@ -191,14 +185,20 @@ $(function() {
     $("#shipping").on("change", function(e) {
         const value = e.target.value;
         const totalPrice = $(".total-price").html();
-        const totalPriceNumber = Number(totalPrice.replace(/[^0-9.-]+/g,""));
-        var totalPriceCalculate = totalPriceNumber + Number(value);
+        const totalPriceNumber = totalPrice.replace(/[^0-9.-]+/g,"").substring(1);
+
+
+        const totalPriceCalculate = Math.round(totalPriceNumber) + Number(value);
+        const finalTotalPrice = totalPriceCalculate.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+        const discountCoupon = parseFloat(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
 
         $(".shipping-price-container").removeClass("d-none")
 
-        $(".shipping-price").html(formatter.format(value))
+        $(".shipping-price").html("Rp. " + discountCoupon)
 
-        $(".total-price-checkout").html(formatter.format(totalPriceCalculate))
+        $(".total-price-checkout").html("Rp. " + finalTotalPrice)
         
     });
 
@@ -223,19 +223,30 @@ $(function() {
 
                 if(data.data) {
                     const couponData = data.data;
-                    const totalPriceItem = $(".total-price-items").html()
-                    const totalPriceItemNumber = Number(totalPriceItem.replace(/[^0-9.-]+/g,""));
-                    const shippingPrice = $(".shipping-price").html()
-                    const shippingPriceNumber = Number(shippingPrice.replace(/[^0-9.-]+/g,""));
-                    var totalPrice = totalPriceItemNumber - couponData.discount + shippingPriceNumber;
 
-                    $(".total-price").html(formatter.format(totalPrice))
+                    const totalPriceItem = $(".total-price-items").html();
+                    const totalPriceItemNumber = totalPriceItem.replace(/[^0-9.-]+/g,"").substring(1);
+
+                    const shippingPrice = $(".shipping-price").html()
+                    const shippingPriceNumber = shippingPrice.replace(/[^0-9.-]+/g,"").substring(1);
+
+
+                    const totalPrice = Number(totalPriceItemNumber) - couponData.discount + Number(shippingPriceNumber);
+
+                    console.log(totalPrice);
+
+                    const finalTotalPrice = Number(totalPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+                    const discountCoupon = couponData.discount.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    
+
+
+                    $(".total-price").html("Rp. " + finalTotalPrice)
                     $(".coupon-code").html(couponCode);
-                    $(".coupon-discount").html(formatter.format(couponData.discount));
-                    $(".coupon-discount-checkout").html(formatter.format(couponData.discount));
-                    $(".total-price-checkout").html(formatter.format(totalPrice))
-        
-                    console.log(couponData);
+                    $(".coupon-discount").html("Rp. " + discountCoupon);
+                    $(".coupon-discount-checkout").html("Rp. " + discountCoupon);
+                    $(".total-price-checkout").html("Rp. " + finalTotalPrice);
+    
                 } else {
                     $(".coupon-container").addClass("d-none")
                 }

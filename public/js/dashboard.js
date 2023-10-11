@@ -1,5 +1,5 @@
 $(function() {
-    var table = $("table").DataTable({
+    var productTable = $("#product-table").DataTable({
         dom: 'Bftipr',
         buttons: [
             {
@@ -94,9 +94,47 @@ $(function() {
         select: true,
     });
 
-    table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+    productTable.buttons().container().appendTo( $('.col-sm-6:eq(0)', productTable.table().container() ) );
 
-    table.rows( { selected: true, page: "current" } ).nodes();
+    productTable.rows( { selected: true, page: "current" } ).nodes();
+
+
+    var orderTable = $("#order-table").DataTable({
+        dom: 'Bftipr',
+        buttons: [
+            {
+                extend: "excel",
+                text: "<i class='fa-solid fa-file-excel'></i> Export To Excel"
+            },
+            {
+                extend: "csv",
+                text: "<i class='fa-solid fa-file-csv'></i> Export To CSV"
+            },
+            {
+                extend: "pdf",
+                text: "<i class='fa-solid fa-file-pdf'></i> Export To PDF"
+            },
+            {
+                extend: "print",
+                text: "<i class='fa-solid fa-print'></i> Print"
+            },
+            {
+                extend: "selected",
+                text: "<i class='fa-solid fa-circle-info'></i> Detail Order",
+                action: function(e, dt, node, config) {
+                    var rows = dt.rows({ selected:true }).data();
+                    var selectedOrderId = rows[0][rows[0].length - 1]
+
+                    $("#detailOrder" + selectedOrderId).modal("show");
+                }
+            }
+        ],
+        select: true,
+    });
+
+    orderTable.buttons().container().appendTo( $('.col-sm-6:eq(0)', orderTable.table().container() ) );
+
+    orderTable.rows( { selected: true, page: "current" } ).nodes();
 
 
     $(".img-item").on("mouseover", function() {

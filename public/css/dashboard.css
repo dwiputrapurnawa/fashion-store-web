@@ -1,3 +1,8 @@
+p {
+  text-align: justify;
+}
+
+
 .bi {
     display: inline-block;
     width: 1rem;

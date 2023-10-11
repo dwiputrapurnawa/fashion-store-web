@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\PurchaseController;
@@ -70,3 +71,5 @@ Route::get("/dashboard/products/{product:slug}/edit", [ProductController::class,
 
 Route::post("/images", [ImagesController::class, "store"]);
 Route::delete("/images", [ImagesController::class, "destroy"]);
+
+Route::get("/dashboard/orders", [OrderController::class, "index"]);

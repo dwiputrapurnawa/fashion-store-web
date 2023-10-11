@@ -25,7 +25,7 @@ class OrderFactory extends Factory
             "tracking_number" => mt_rand(100000000000, 999999999999),
             "shipping_id" => fake()->numberBetween(1, 5),
             "shipping_cost" => fake()->numberBetween(10000, 100000),
-            "invoice_number" => fake()->numberBetween(100000000000, 999999999999),
+            "invoice_number" => "INV" . fake()->numberBetween(100000000000, 999999999999),
             "coupon_id" => fake()->numberBetween(1, 10),
             "address" => fake()->address(),
         ];

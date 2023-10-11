@@ -17,16 +17,6 @@
 
     <hr>
 
-   {{-- <div class="mt-5 col-lg-2 col-md-2 ms-auto">
-    <select class="form-select">
-        <option selected>Sort By</option>
-        <option value="1">Higher Price</option>
-        <option value="2">Lower Price</option>
-        <option value="3">Rating</option>
-      </select>
-   </div> --}}
-
-
 
    <div class="deals-container" id="deals">
     <h5 class="title-background">Deals</h5>
@@ -40,11 +30,11 @@
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $productDeal->product->slug }}"><h5 class="card-title">{{ Str::ucfirst($productDeal->product->name) }}</h5></a>
-          <p class="card-text currency">{{ $productDeal->product->price - (($productDeal->percentage / 100) * $productDeal->product->price) }}</p>
+          <p class="card-text">Rp. @money($productDeal->product->price - (($productDeal->percentage / 100) * $productDeal->product->price))</p>
           
           <div class="mb-3">
             <span class="badge text-bg-danger">{{ $productDeal->percentage }}%</span>
-            <small class="card-text currency text-decoration-line-through">{{ $productDeal->product->price }}</small>
+            <small class="card-text text-decoration-line-through">Rp. @money($productDeal->product->price)</small>
           </div>
 
           
@@ -83,12 +73,12 @@
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-          <p class="card-text currency">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</p>
+          <p class="card-text">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</p>
 
           @if ($product->discount)
             <div class="mb-3">
               <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-              <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+              <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
             </div>
           @endif
           

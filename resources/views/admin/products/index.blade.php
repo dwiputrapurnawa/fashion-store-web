@@ -14,7 +14,7 @@
 @endif
 
 <div class="mb-3">
-  <table class="table table-hover table-responsive">
+  <table class="table table-hover table-responsive" id="product-table">
     <thead>
       <tr>
         <th scope="col">#</th>

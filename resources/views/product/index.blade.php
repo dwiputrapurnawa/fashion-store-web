@@ -31,21 +31,28 @@
         </div>
 
         <div class="col-lg">
-            <h5>{{ $product->name }}</h5>
+            <div class="row">
+                <div class="col-sm-auto">
+                    <h5>{{ $product->name }}</h5>
+                </div>
+                <div class="col-sm">
+                    <span class="badge text-bg-info">{{ $product->category->name }}</span>
+                </div>
+            </div>
             <div class="row">
                 <p class="d-inline col-sm-auto">Sold 100+</p>
                 <div class="d-inline col-sm-auto">
                     <i class="fa-solid fa-star" style="color: #ffc800;"></i> {{ round($product->getAvgRating(), 1) }}
-                    <p class="d-inline">({{ $product->user_rating->count() }} rating)</p>
+                    <p class="d-inline">({{ $product->user_rating->count() }} Rating)</p>
                 </div>
                 <p class="d-inline col-sm-auto">Discussion ({{ $product->comments->count() }})</p>
             </div>
-            <h3 class="fw-bold product-price currency d-inline">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h3>
+            <h3 class="fw-bold product-price d-inline">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</h3>
 
             @if ($product->discount)
                 <div class="mb-3">
                 <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-                <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+                <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
                 </div>
             @endif
             <hr>
@@ -82,7 +89,7 @@
                             <p>Subtotal</p>
                         </div>
                         <div class="col-sm-auto">
-                            <h5 class="fw-bold subtotal currency">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h5>
+                            <h5 class="fw-bold subtotal">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</h5>
                         </div>
                     </div>
                     <button class="btn custom-btn w-100" type="submit">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>

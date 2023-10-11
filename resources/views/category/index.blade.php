@@ -33,12 +33,12 @@
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-          <p class="card-text currency">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</p>
+          <p class="card-text">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</p>
 
           @if ($product->discount)
             <div class="mb-3">
               <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-              <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+              <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
             </div>
           @endif
           

@@ -99,15 +99,18 @@
         </div>
         <div class="col-lg">
             <label for="category" class="form-label">Category</label>
-            <select class="form-select" name="category_id">
-                @foreach ($categories as $category)
-                    @if ($product->category->name === $category->name)
-                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
-                    @else
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endif
-                @endforeach
-              </select>
+            <div class="input-group">
+                <select class="form-select" name="category_id">
+                    @foreach ($categories as $category)
+                        @if ($product->category->name === $category->name)
+                        <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                        @else
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
+                    @endforeach
+                  </select>
+                  <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#categoryModal">+</button>
+            </div>
         </div>
     </div>
 
@@ -122,4 +125,33 @@
 
     </form> 
 </div>
+
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Category</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="/categories" method="post">
+            @csrf
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-dark">Save changes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 @endsection

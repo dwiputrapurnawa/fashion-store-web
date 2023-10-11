@@ -71,10 +71,7 @@
                     @endforeach
                   </select>
                   <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#categoryModal">+</button>
-            </div>
-            
-            
-              
+            </div> 
         </div>
     </div>
 

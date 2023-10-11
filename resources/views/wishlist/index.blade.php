@@ -38,22 +38,29 @@
        </a>
        <div class="card-body">
          <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-         <p class="card-text currency">{{ $product->price }}</p>
+         <p class="card-text">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</p>
          
+         @if ($product->discount)
+            <div class="mb-3">
+              <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
+              <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
+            </div>
+          @endif
+
            <div class="mb-3">
                <i class="fa-solid fa-star" style="color: yellow;"></i>
                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 1) }} | Terjual 5.9K</p>
            </div>
 
            <div class="row">
-              <form class="col-lg" action="/cart" method="post">
+              <form class="col-sm" action="/cart" method="post">
                   @csrf
                   <input type="hidden" name="quantity" value="1">
                   <input type="hidden" name="product_id" value="{{ $product->id }}">
                   <button type="submit" class="btn custom-btn w-100">Add to Cart <i class="fa-solid fa-cart-shopping"></i></button>
               </form>
      
-                  <div class="col-lg-auto">
+                  <div class="col-sm-auto">
                       <button class="btn btn-danger float-end" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete{{ $product->name }}"><i class="fa-solid fa-trash"></i></button>
                     </div>
            </div>

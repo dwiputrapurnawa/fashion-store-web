@@ -44,13 +44,13 @@
               <div class="col-md-8">
                 <div class="card-body">
                   <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
-                  <p class="card-text product-price currency fw-bold">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</p>
+                  <p class="card-text product-price fw-bold">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</p>
                 
 
                   @if ($product->discount)
                     <div class="mb-3">
                     <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-                    <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+                    <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
                     </div>
                   
                   @endif
@@ -65,7 +65,7 @@
                     <p class="fw-bold">Subtotal</p>
                   </div>
                   <div class="col-sm-auto">
-                    <p class="currency subtotal fw-bold">{{ $product->pivot->quantity * ($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price) }}</p>
+                    <p class="subtotal fw-bold">Rp. @money($product->pivot->quantity * ($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price))</p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@
                 </div>
 
                 <div class="col-lg-auto">
-                  <p class="currency total-price-items">{{ auth()->user()->getTotalPrice() }}</p>
+                  <p class="total-price-items">Rp. @money(auth()->user()->getTotalPrice())</p>
                 </div>
               </div>
 
@@ -144,7 +144,7 @@
                   <h6 class="coupon-code"></h6>
                 </div>
                 <div class="col-lg-auto">
-                  <p class="d-inline">-<p class="currency d-inline coupon-discount"></p></p>
+                  <p class="d-inline">-<p class="d-inline coupon-discount"></p></p>
                 </div>
               </div>
 
