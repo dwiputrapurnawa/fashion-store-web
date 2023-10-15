@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId("shipping_id");
             $table->decimal("total_price");
             $table->enum("payment_status", ["pending", "paid"]);
-            $table->enum("order_status", ["waiting", "processed", "sent"]);
+            $table->enum("order_status", ["waiting", "processed", "sent", "completed"]);
             $table->string("tracking_number")->nullable();
             $table->decimal("shipping_cost");
             $table->string("address");

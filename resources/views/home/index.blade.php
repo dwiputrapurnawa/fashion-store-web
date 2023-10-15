@@ -26,7 +26,7 @@
       @foreach ($productDeals as $productDeal)
       <div class="col-sm-auto card product-item m-3">
         <a href="/product/{{ $productDeal->product->slug }}">
-          <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="card-img-top" alt="card-img">
+          <img src="/{{ $productDeal->images[0]->path ?? 'images/no-image.jpg' }}" class="card-img-top" alt="card-img">
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $productDeal->product->slug }}"><h5 class="card-title">{{ Str::ucfirst($productDeal->product->name) }}</h5></a>
@@ -39,8 +39,11 @@
 
           
             <div class="mb-3">
-              <i class="fa-solid fa-star" style="color: #ffc800;"></i>
-                <p class="card-text d-inline text-secondary">{{ round($productDeal->product->getAvgRating(), 2) }} | Terjual 5.9K</p>
+              @if (!$productDeal->product->user_rating->isEmpty())
+                <i class="fa-solid fa-star" style="color: #ffc800;"></i>
+                <p class="card-text d-inline text-secondary">{{ round($productDeal->product->getAvgRating(), 2) }} | Terjual 5.9K</p>              
+              @endif
+              
             </div>
   
           <form action="/cart" method="post">
@@ -69,7 +72,7 @@
 
     <div class="col-lg-auto card product-item m-3">
         <a href="/product/{{ $product->slug }}">
-          <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="card-img-top" alt="card-img">
+          <img src="/{{ $product->images[0]->path ?? 'images/no-image.jpg' }}" class="card-img-top" alt="card-img">
         </a>
         <div class="card-body">
           <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
@@ -83,8 +86,10 @@
           @endif
           
             <div class="mb-3">
-              <i class="fa-solid fa-star" style="color: #ffc800;"></i>
-                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 1) }} | Terjual 5.9K</p>
+              @if (!$product->user_rating->isEmpty())
+                <i class="fa-solid fa-star" style="color: #ffc800;"></i>
+                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 2) }} | Terjual 5.9K</p>              
+              @endif
             </div>
 
           <form action="/cart" method="post">

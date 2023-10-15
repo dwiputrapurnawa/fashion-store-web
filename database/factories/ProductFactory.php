@@ -21,8 +21,10 @@ class ProductFactory extends Factory
             'slug' => fake()->slug(),
             'price' => fake()->numberBetween(100000, 500000),
             'stock' => fake()->numberBetween(5, 20),
+            'weight' => fake()->numberBetween(1000, 2000),
             'description' => fake()->paragraph(1),
             'category_id' => fake()->numberBetween(1,3),
+            'published' => false,
         ];
     }
 }

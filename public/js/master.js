@@ -256,6 +256,22 @@ $(function() {
             
         });
 
+        $(".clipboard-btn").on("click", function() {
+            const trackingNumber = $(".tracking-number").html();
+
+            navigator.clipboard.writeText(trackingNumber).then(() => {
+                console.log(`Copied "${trackingNumber}" to clipboard`);
+
+                $(this).attr("data-bs-title", "Copied to clipboard!")
+
+                $(this).tooltip("show");
+
+
+            }).catch((err) => {
+                console.error('Could not copy text: ', err);
+            });
+        });
+
     
     $("#checkout-btn").on("click", function() {
 

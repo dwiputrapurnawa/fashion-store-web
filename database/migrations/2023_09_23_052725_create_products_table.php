@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string("slug")->unique()->nullable();
             $table->decimal("price", 10, 2, true)->default(0);
             $table->integer("stock", false, true)->default(0);
+            $table->decimal("weight")->default(0);
             $table->text("description")->nullable();
             $table->foreignId("category_id");
+            $table->boolean("published")->default(false);
             $table->timestamps();
         });
     }

@@ -163,3 +163,37 @@ input::-webkit-inner-spin-button {
 .text-custom-color {
     color: #8F5E2E;
 }
+
+.owl-dots span {
+    width:10px;
+    height:10px;
+    margin:5px 7px;
+    background: gray !important;
+    display:block;
+    -webkit-backface-visibility:visible;
+    -webkit-transition:opacity 200ms ease;
+    -moz-transition:opacity 200ms ease;
+    -ms-transition:opacity 200ms ease;
+    -o-transition:opacity 200ms ease;
+    transition:opacity 200ms ease;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    border-radius:30px;
+}
+
+.owl-dots .active span {
+    width:10px;
+    height:10px;
+    margin:5px 7px;
+    background: #8F5E2E !important;
+    display:block;
+    -webkit-backface-visibility:visible;
+    -webkit-transition:opacity 200ms ease;
+    -moz-transition:opacity 200ms ease;
+    -ms-transition:opacity 200ms ease;
+    -o-transition:opacity 200ms ease;
+    transition:opacity 200ms ease;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    border-radius:30px;
+}

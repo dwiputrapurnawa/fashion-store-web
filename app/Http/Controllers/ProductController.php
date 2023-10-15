@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Discount;
 use App\Models\Images;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -21,9 +22,10 @@ class ProductController extends Controller
             "name" => "required",
             "price" => "required",
             "stock" => "required",
+            "weight" => "required",
             "category_id" => "required",
-            'files.*' => 'required|mimes:jpeg,png|max:2048',
-            "description" => "required"
+            'files.*' => 'required|image|max:2048',
+            "description" => "required|max:500"
         ]);
         
         $product = Product::create($validatedData);
@@ -67,7 +69,8 @@ class ProductController extends Controller
             "name" => "required",
             "price" => "required",
             "stock" => "required",
-            "description" => "required",
+            "weight" => "required",
+            "description" => "required|max:500",
             "category_id" => "required",
         ]);
 
@@ -79,10 +82,22 @@ class ProductController extends Controller
     }
 
     public function destroy(Request $request) {
-        $productIds = $request;
+        $validatedData = $request->validate([
+            "product_id" => "required"
+        ]);
 
-        Product::whereIn("id", $productIds)->delete();
+        Product::where("id", $validatedData["product_id"])->delete();
+        Images::where("product_id", $validatedData["product_id"])->delete();
+        Discount::where("product_id", $validatedData["product_id"])->delete();
 
-        return response()->json(["message", "successfully deleted item"]);
+        return back()->with("message", "Successfully deleted product");
     }
+
+    // public function destroy(Request $request) {
+    //     $productIds = $request;
+
+    //     Product::whereIn("id", $productIds)->delete();
+
+    //     return response()->json(["message", "successfully deleted item"]);
+    // }
 }

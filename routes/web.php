@@ -5,7 +5,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPageController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\LoginController;
@@ -73,3 +75,11 @@ Route::post("/images", [ImagesController::class, "store"]);
 Route::delete("/images", [ImagesController::class, "destroy"]);
 
 Route::get("/dashboard/orders", [OrderController::class, "index"]);
+Route::patch("/order", [OrderController::class, "update"]);
+
+Route::post("/discount", [DiscountController::class, "store"]);
+
+Route::get("/dashboard/customers", [CustomerController::class, "index"]);
+Route::post("/dashboard/customers", [CustomerController::class, "store"]);
+Route::delete("/dashboard/customers", [CustomerController::class, "destroy"]);
+Route::patch("/dashboard/customers", [CustomerController::class, "update"]);

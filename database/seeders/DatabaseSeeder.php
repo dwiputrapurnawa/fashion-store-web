@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         // Cart::factory(20)->create();
         Coupon::factory(10)->create();
         Order::factory(20)->hasAttached($products, ["quantity" => 5, "price_per_unit" => 50000])->create();
-        Images::factory(30)->create();
+        Images::factory(50)->create();
 
         Shipping::factory()->create([
             "name" => "SiCepat"

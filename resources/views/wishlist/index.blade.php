@@ -34,7 +34,7 @@
   @foreach ($products as $product)
    <div class="col-lg-auto card product-item m-3" style="width: 18rem;">
        <a href="/product/{{ $product->slug }}">
-         <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="card-img-top" alt="card-img">
+         <img src="/{{ $product->images[0]->path ?? "images/no-image.jpg" }}" class="card-img-top" alt="card-img">
        </a>
        <div class="card-body">
          <a class="text-decoration-none text-dark" href="/product/{{ $product->slug }}"><h5 class="card-title">{{ Str::ucfirst($product->name) }}</h5></a>
@@ -47,10 +47,12 @@
             </div>
           @endif
 
-           <div class="mb-3">
-               <i class="fa-solid fa-star" style="color: yellow;"></i>
-               <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 1) }} | Terjual 5.9K</p>
-           </div>
+          <div class="mb-3">
+            @if (!$product->user_rating->isEmpty())
+              <i class="fa-solid fa-star" style="color: #ffc800;"></i>
+              <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 2) }} | Terjual 5.9K</p>              
+            @endif
+          </div>
 
            <div class="row">
               <form class="col-sm" action="/cart" method="post">

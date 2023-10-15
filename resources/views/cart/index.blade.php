@@ -38,7 +38,7 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <a href="/product/{{ $product->slug }}">
-                  <img src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" class="img-fluid rounded-start" alt="product-img">
+                  <img src="/{{ $product->images[0]->path ?? "images/no-image.jpg" }}" class="img-fluid rounded-start" alt="product-img">
                 </a>
               </div>
               <div class="col-md-8">
@@ -232,17 +232,17 @@
                         <div class="mb-3 border p-3">
                           <div class="row">
                             <div class="col-lg-auto">
-                              <img class="d-inline-block" style="width: 70px" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920" alt="">
+                              <img class="d-inline-block" style="width: 70px" src="/{{ $product->images[0]->path ?? "images/no-image.jpg" }}" alt="">
                             </div>
 
                             <div class="col-lg">
                               <h5>{{ $product->name }}</h5>
                               <div class="row">
                                 <div class="col-lg">
-                                  <h6 class="currency fw-bold">{{ $product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price }}</h6>
+                                  <h6 class="fw-bold">Rp. @money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</h6>
                                   @if ($product->discount)
                                       <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-                                      <small class="card-text currency text-decoration-line-through">{{ $product->price }}</small>
+                                      <small class="card-text text-decoration-line-through">Rp. @money($product->price)</small>
                                   @endif
 
                                   

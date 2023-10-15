@@ -23,22 +23,16 @@
           </nav>
 
         <div class="col-lg">
-            <img class="img-fluid mb-2 img-view img-thumbnail" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
+            <img class="img-fluid mb-2 img-view img-thumbnail" src="/{{ $product->images[0]->path ?? "images/no-image.jpg" }}">
             <div class="img-list">
-                <img class="img-fluid img-thumbnail mb-2 img-item" src="https://storage.sg.content-cdn.io/cdn-cgi/image/%7Bwidth%7D,%7Bheight%7D,quality=75,format=auto/in-resources/ff5c6da1-2d74-4846-96c9-ccd65d766244/Images/ProductImages/Source/Levis-Mens-Relaxed-Fit-Graphic-Zip-Up-Hoodie-387170020_01_Front.jpg">
-                <img class="img-fluid img-thumbnail mb-2 img-item" src="https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920">
+                @foreach ($product->images as $image)
+                <img class="img-fluid img-thumbnail mb-2 img-item" src="/{{ $image->path ?? "images/no-image.jpg" }}">
+                @endforeach
             </div>
         </div>
 
         <div class="col-lg">
-            <div class="row">
-                <div class="col-sm-auto">
-                    <h5>{{ $product->name }}</h5>
-                </div>
-                <div class="col-sm">
-                    <span class="badge text-bg-info">{{ $product->category->name }}</span>
-                </div>
-            </div>
+            <h5>{{ $product->name }}</h5>
             <div class="row">
                 <p class="d-inline col-sm-auto">Sold 100+</p>
                 <div class="d-inline col-sm-auto">
@@ -57,7 +51,7 @@
             @endif
             <hr>
 
-            <p class="text-wrap">{{ $product->description }}</p>
+            <p class="text-wrap">{!! $product->description !!}</p>
         </div>
         
         <div class="col">

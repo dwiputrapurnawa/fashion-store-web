@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string("profile_picture")->nullable();
+            $table->string("phone_number")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

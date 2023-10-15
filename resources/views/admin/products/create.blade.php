@@ -13,74 +13,97 @@
   </div>
 @endif
 
-<div class="row mb-3" id="preview-img-container">
-</div>
+
 
 <div class="mb-3 col-lg-8">
    <form action="/product" method="post" class="mb-5" enctype="multipart/form-data">
     @csrf
 
+    <div class="border p-3 mb-3 rounded">
+        <div class="row mb-3" id="preview-img-container">
 
-    <div class="mb-3">
-        <label class="form-label">Upload Images</label>
-        <input type="file" name="files[]" class="form-control @error('files.*') is-invalid @enderror" id="uploadImages" multiple>
-        @error('files.*')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
-
-
-
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
-        @error('name')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
-
-    <div class="row mb-3">
-        <div class="col-lg">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price">
-            @error('price')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
         </div>
-        <div class="col-lg">
-            <label for="stock" class="form-label">Stock</label>
-            <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock">
-            @error('stock')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-        @enderror
-        </div>
-        <div class="col-lg">
-            <label for="category" class="form-label">Category</label>
-            <div class="input-group">
-                <select class="form-select" name="category_id">
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                  </select>
-                  <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#categoryModal">+</button>
-            </div> 
+    
+    
+        <div class="mb-3">
+            <label class="form-label">Upload Images</label>
+            <input type="file" name="files[]" class="form-control @error('files.*') is-invalid @enderror" id="uploadImages" multiple>
+            @error('files.*')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
     </div>
 
-    <div class="mb-3">
-        <label for="editor" class="form-label">Description</label>
-        <textarea name="description" id="editor" cols="30" rows="10"></textarea>
-    </div>
 
-    <button class="btn btn-dark" type="submit">Save Product</button>
+
+    <div class="border p-3 rounded">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+    
+        <div class="row mb-3">
+            <div class="col-lg">
+                <label for="price" class="form-label">Price (IDR)</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-rupiah-sign"></i></span>
+                    <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price">
+                    @error('price')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg">
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock">
+                @error('stock')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+            </div>
+            <div class="col-lg">
+                <label for="weight" class="form-label">Weight (Gram)</label>
+                <div class="input-group">
+                    <input type="number" name="weight" class="form-control @error('weight') is-invalid @enderror" id="weight">
+                    <span class="input-group-text"><i class="fa-solid fa-weight-hanging"></i></span>
+                    @error('weight')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-lg">
+                <label for="category" class="form-label">Category</label>
+                <div class="input-group">
+                    <select class="form-select" name="category_id">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                      </select>
+                      <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#categoryModal">+</button>
+                </div> 
+            </div>
+            
+        </div>
+    
+        <div class="mb-3">
+            <label for="editor" class="form-label">Description</label>
+            <textarea name="description" id="editor" style="border: none"></textarea>
+        </div>
+    
+        <button class="btn btn-dark" type="submit">Save Product</button>
+    </div>
 
     </form> 
 </div>

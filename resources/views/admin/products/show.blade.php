@@ -5,7 +5,7 @@
 @endsection --}}
 
 @section('content')
-    <div class="row">
+    <div class="row border p-3 rounded">
         <div class="col-lg-auto">
             <img class="img-fluid mb-2 img-view img-thumbnail" src="/{{ $product->images[0]->path }}">
             <div class="img-list">

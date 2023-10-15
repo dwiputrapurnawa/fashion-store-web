@@ -12,7 +12,7 @@ class ImagesController extends Controller
 
         $validatedData = $request->validate([
             "product_id" => "required",
-            'files.*' => 'required|mimes:jpeg,png|max:2048',
+            'files.*' => 'required|image|max:2048',
         ]);
 
         if($request->file("files")) {

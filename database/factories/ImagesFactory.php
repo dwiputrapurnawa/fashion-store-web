@@ -18,7 +18,7 @@ class ImagesFactory extends Factory
     {
         return [
             "product_id" => fake()->numberBetween(1, 20),
-            "path" => "https://www.diadora.com/dw/image/v2/BBPK_PRD/on/demandware.static/-/Sites-diadora-master/default/dw250e8493/images/hi-res/502.180038_50025_00_HR.jpg?sw=1920",
+            "path" => "product-images/knYYEpSRtfj5hj7MmaFXfS6kEx7uiclVeUg9Xm4a.webp",
         ];
     }
 }
