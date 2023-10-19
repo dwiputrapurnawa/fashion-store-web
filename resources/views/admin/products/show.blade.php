@@ -5,46 +5,104 @@
 @endsection --}}
 
 @section('content')
-    <div class="row border p-3 rounded">
-        <div class="col-lg-auto">
-            <img class="img-fluid mb-2 img-view img-thumbnail" src="/{{ $product->images[0]->path }}">
-            <div class="img-list">
+
+    <div class="row border rounded mb-3">
+        <div class="col-sm-auto mt-3">
+            <a class="btn btn-dark text-decoration-none mb-3" href="/dashboard/products/{{ $product->slug }}/edit"><i class="fa-solid fa-pen-to-square"></i> Edit Product</a>
+        </div>
+        <div class="col-sm-auto mt-3">
+            <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#deleteProduct"><i class="fa-solid fa-trash"></i> Delete Product</button>
+        </div>
+    </div>
+
+    <div class="row column-gap-3">
+        <div class="col-lg p-3 border rounded mb-3">
+            <h5 class="mb-3 fw-bold">Product Images</h5>
+            <div class="row">
                 @foreach ($product->images as $image)
-                <img class="img-fluid img-thumbnail mb-2 img-item" src="/{{ $image->path }}">
+                   <div class="col-sm-auto mb-3">
+                        <img class="img-fluid img-thumbnail highlight" style="width: 200px" src="/{{ $image->path }}" alt="product-images">
+                   </div>
                 @endforeach
             </div>
         </div>
-        <div class="col-lg">
-            <div class="row">
-                <div class="col-sm-auto">
-                    <h5>{{ $product->name }}</h5>
-                </div>
-                <div class="col-sm">
-                    <span class="badge text-bg-info">{{ $product->category->name }}</span>
-                </div>
-            </div>
-            
-            
-            <div class="row">
-                <p class="d-inline col-sm-auto">Sold 100+</p>
-                <div class="d-inline col-sm-auto">
-                    <i class="fa-solid fa-star" style="color: #ffc800;"></i> {{ round($product->getAvgRating(), 1) }}
-                    <p class="d-inline">({{ $product->user_rating->count() }} Rating)</p>
-                </div>
-                <p class="d-inline col-sm-auto">Discussion ({{ $product->comments->count() }})</p>
-                <p class="d-inline col-sm-auto">Stock ({{ $product->stock }})</p>
-            </div>
-            <h3 class="fw-bold product-price currency d-inline">Rp.@money($product->discount ? $product->price - (($product->discount->percentage / 100) * $product->price) : $product->price)</h3>
 
-            @if ($product->discount)
-                <div class="mb-3">
-                <span class="badge text-bg-danger">{{ $product->discount->percentage }}%</span>
-                <small class="card-text text-decoration-line-through">Rp.@money($product->price)</small>
-                </div>
-            @endif
-            <hr>
-
-            <p class="text-wrap">{!! $product->description !!}</p>
+        <div class="col-lg p-3 border rounded mb-3">
+            <h5 class="mb-3 fw-bold">Product Information</h5>
+            <table class="table table-striped-columns">
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td class="text-capitalize">{{ $product->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Slug</td>
+                        <td>{{ $product->slug }}</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>Rp.@money($product->price)</td>
+                    </tr>
+                    <tr>
+                        <td>Stock</td>
+                        <td>{{ $product->stock }}</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>{{ $product->weight }} Kg</td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>{{ $product->category->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Rating</td>
+                        <td>{{ $product->getAvgRating() ?? 0 }}</td>
+                    </tr>
+                    <tr>
+                        <td>Comment</td>
+                        <td>{{ $product->comments->count() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Review</td>
+                        <td>{{ $product->reviews->count() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{ $product->description }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
     </div>
+
+
+    <div class="modal" tabindex="-1" id="deleteProduct">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete {{ $product->name }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="/product" method="post">
+                @csrf
+                @method("delete")
+                
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-dark">Yes</button>
+                </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    
 @endsection

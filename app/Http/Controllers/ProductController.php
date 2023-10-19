@@ -90,7 +90,7 @@ class ProductController extends Controller
         Images::where("product_id", $validatedData["product_id"])->delete();
         Discount::where("product_id", $validatedData["product_id"])->delete();
 
-        return back()->with("message", "Successfully deleted product");
+        return redirect("/dashboard/products")->with("message", "Successfully deleted product");
     }
 
     // public function destroy(Request $request) {

@@ -79,7 +79,7 @@
             <li>
               <form action="/logout" method="POST">
                 @csrf
-                <button class="dropdown-item custom-highlight" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                <button class="dropdown-item custom-highlight" type="submit"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
               </form>
             </li>
           </ul>

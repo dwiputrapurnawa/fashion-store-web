@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.1/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css" rel="stylesheet">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -148,10 +148,13 @@
   
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 text-dark custom-highlight" href="#">
-                  <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                <form action="/logout" method="post">
+                  @csrf
+                  <button class="nav-link d-flex align-items-center gap-2 text-dark custom-highlight w-100" type="submit">
+                    <svg class="bi"><use xlink:href="#door-closed"/></svg>
                   Sign out
-                </a>
+                  </button>
+                </form>
               </li>
             </ul>
           </div>
@@ -181,6 +184,5 @@
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <script src="/js/dashboard.js"></script>
-
 </body>
 </html>
