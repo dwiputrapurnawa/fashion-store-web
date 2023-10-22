@@ -180,6 +180,8 @@
                       <h1 class="modal-title fs-5" id="exampleModalLabel">Checkout Items</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <form action="/order" method="POST">
+                      @csrf
                     <div class="modal-body">
                       
                       <div class="mb-3">
@@ -192,14 +194,15 @@
 
                        <div class="mb-3 border p-3 rounded">
                         <h5>Shipping expedition</h5>
-                        <select class="form-select" name="shipping" id="shipping">
+                        <select class="form-select" name="shipping_id" id="shipping_id">
+                          <option selected>Select Courier</option>
                           @foreach ($shippings as $shipping)
-                            <option value="{{ mt_rand(20000, 100000) }}">{{ $shipping->name }}</option>
+                            <option value="{{ $shipping->id }}">{{ $shipping->name }}</option>
                           @endforeach
                         </select>
                        </div>
 
-                       <div class="mb-4 border p-3">
+                       {{-- <div class="mb-4 border p-3">
                         <h5>Payment</h5>
                         <p>Pay using credit cards</p>
                         <img class="img-fluid mb-3" width="80px" src="/images/mastercard-visa.png" alt="mastercard-visa">
@@ -226,7 +229,7 @@
                             </div>
                           </div>
                         </form>
-                       </div>
+                       </div> --}}
 
                        @foreach ($products as $product)
                         <div class="mb-3 border p-3">
@@ -297,23 +300,18 @@
                         </div>
 
                        </div>
-
-
-                       
-
                       </div>
+
+                      <input type="hidden" name="coupon_id">
+                      <input type="hidden" name="shipping_cost">
+                      <input type="hidden" name="total_price">
 
                     </div>
                     <div class="modal-footer">
-
-                      <form action="/checkout" method="POST">
-                        {{-- TODO CHECKOUT FORM --}}
-                        
                         <button type="button" class="btn custom-btn-outline" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn custom-btn" id="checkout-btn">Checkout</button>
-                      </form>
-                      
-                    </div>
+                        <button type="submit" class="btn custom-btn" id="checkout-btn" disabled>Checkout</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

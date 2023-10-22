@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $users = User::factory(10)->create();
-        $products = Product::factory(20)->create();
+        User::factory(10)->create();
+        Product::factory(20)->create();
         Category::factory(3)->create();
         Wishlist::factory(10)->create();
         // Rating::factory(20)->create();
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
         // Review::factory(20)->create();
         // Cart::factory(20)->create();
         Coupon::factory(10)->create();
-        Order::factory(20)->hasAttached($products, ["quantity" => 5, "price_per_unit" => 50000])->create();
+        // Order::factory(20)->hasAttached($products, ["quantity" => 5, "price_per_unit" => 50000])->create();
         Images::factory(50)->create();
 
         Shipping::factory()->create([

@@ -54,7 +54,7 @@
                             <p>{{ $order->created_at->format("d F Y") }}</p>
                         </div>
                         <div class="col-lg-auto">
-                            <span class="badge rounded-pill text-bg-warning">Waiting</span>
+                            <span class="badge rounded-pill text-bg-warning text-capitalize">{{ $order->order_status }}</span>
                         </div>
                         <div class="col-lg-auto">
                             <p>{{ $order->invoice_number }}</p>
@@ -139,7 +139,11 @@
                                     <p>{{ $order->shipping->name }}</p>
                                     <div class="mb-2">
                                         <p class="tracking-number d-inline">{{ $order->tracking_number }}</p>
-                                        <button class="btn btn-sm clipboard-btn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copy the Tracking Number"><i class="fa-regular fa-clipboard"></i></button>
+                                        @if ($order->tracking_number)
+                                            <button class="btn btn-sm clipboard-btn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Copy the Tracking Number"><i class="fa-regular fa-clipboard"></i></button>
+                                        @else
+                                            -
+                                        @endif
                                     </div>
                                     <p>{{ $order->address }}</p>
                                 </div>
@@ -157,7 +161,11 @@
                                 <div class="col-lg">
                                     <p>Kredit/Debit Card</p>
                                     <p>Rp. @money($order->shipping_cost)</p>
-                                    <p>-Rp. @money($order->coupon->discount)</p>
+                                    @if ($order->coupon)
+                                        <p>-Rp. @money($order->coupon->discount)</p>
+                                    @else
+                                        <p>-</p>
+                                    @endif
                                     <p class="fw-bold">Rp. @money($order->total_price)</p>
                                 </div>
                             </div>

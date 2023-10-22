@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("invoice_number")->unique();
             $table->foreignId("user_id");
-            $table->foreignId("coupon_id");
+            $table->foreignId("coupon_id")->nullable();
             $table->foreignId("shipping_id");
             $table->decimal("total_price");
             $table->enum("payment_status", ["pending", "paid"]);

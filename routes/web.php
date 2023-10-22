@@ -76,6 +76,7 @@ Route::delete("/images", [ImagesController::class, "destroy"]);
 
 Route::get("/dashboard/orders", [OrderController::class, "index"]);
 Route::patch("/order", [OrderController::class, "update"]);
+Route::post("/order", [OrderController::class, "store"]);
 
 Route::post("/discount", [DiscountController::class, "store"]);
 

@@ -13,6 +13,8 @@ $(function() {
     $(".total-price-checkout").html(totalPrice);
     $(".total-price-items-checkout").html(totalPriceItem);
 
+    $("input[name='total_price']").val(totalPrice);
+
     $(".copyright").html(`&copy; ${currentYear} Fashion Store, Inc`)
 
 
@@ -182,23 +184,38 @@ $(function() {
         }
     });
 
-    $("#shipping").on("change", function(e) {
-        const value = e.target.value;
-        const totalPrice = $(".total-price").html();
-        const totalPriceNumber = totalPrice.replace(/[^0-9.-]+/g,"").substring(1);
+    $("#shipping_id").on("change", function(e) {
+        // const value = e.target.value;
+
+        if(e.target.value != "Select Courier") {
+            const value = Math.floor(Math.random()*40000) + 10000;
+            const totalPrice = $(".total-price").html();
+            const totalPriceNumber = totalPrice.replace(/[^0-9.-]+/g,"").substring(1);
 
 
-        const totalPriceCalculate = Math.round(totalPriceNumber) + Number(value);
-        const finalTotalPrice = totalPriceCalculate.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            const totalPriceCalculate = Math.round(totalPriceNumber) + value;
+            const finalTotalPrice = totalPriceCalculate.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-        const discountCoupon = parseFloat(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            const cost = parseFloat(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 
-        $(".shipping-price-container").removeClass("d-none")
+            $(".shipping-price-container").removeClass("d-none")
 
-        $(".shipping-price").html("Rp. " + discountCoupon)
+            $(".shipping-price").html("Rp. " + cost)
 
-        $(".total-price-checkout").html("Rp. " + finalTotalPrice)
+            $(".total-price-checkout").html("Rp. " + finalTotalPrice)
+
+            $("input[name='shipping_cost']").val(value)
+
+            $("input[name='total_price']").val(finalTotalPrice);
+
+            $("#checkout-btn").prop("disabled", false)
+        } else {
+            $(".shipping-price-container").addClass("d-none")
+            $("#checkout-btn").prop("disabled", true)
+        }
+        
+        
         
     });
 
@@ -233,7 +250,6 @@ $(function() {
 
                     const totalPrice = Number(totalPriceItemNumber) - couponData.discount + Number(shippingPriceNumber);
 
-                    console.log(totalPrice);
 
                     const finalTotalPrice = Number(totalPrice).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
@@ -246,6 +262,9 @@ $(function() {
                     $(".coupon-discount").html("Rp. " + discountCoupon);
                     $(".coupon-discount-checkout").html("Rp. " + discountCoupon);
                     $(".total-price-checkout").html("Rp. " + finalTotalPrice);
+
+                    $("input[name='coupon_id']").val(couponData.id);
+                    $("input[name='total_price']").val(totalPrice);
     
                 } else {
                     $(".coupon-container").addClass("d-none")
@@ -271,29 +290,6 @@ $(function() {
                 console.error('Could not copy text: ', err);
             });
         });
-
-    
-    $("#checkout-btn").on("click", function() {
-
-        
-
-        /*
-
-
-        invoice_number
-        user_id
-        total_price
-        payment_status
-        order_status
-        shipping_id
-        tracking_number
-        shipping_cost
-        coupon_id
-
-
-        */
-
-    });
     
    
 
