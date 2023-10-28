@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountSettingsController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPageController;
@@ -16,6 +17,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -84,3 +87,10 @@ Route::get("/dashboard/customers", [CustomerController::class, "index"]);
 Route::post("/dashboard/customers", [CustomerController::class, "store"]);
 Route::delete("/dashboard/customers", [CustomerController::class, "destroy"]);
 Route::patch("/dashboard/customers", [CustomerController::class, "update"]);
+
+Route::post("/review", [ReviewController::class, "store"]);
+
+Route::get("/account-settings", [AccountSettingsController::class, "index"]);
+Route::get("/account-settings/change-password", [AccountSettingsController::class, "change_password_index"]);
+
+Route::patch("/user", [UserController::class, "update"]);

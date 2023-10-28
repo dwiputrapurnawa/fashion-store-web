@@ -219,7 +219,7 @@ $(function() {
         
     });
 
-        $(".reedem-btn").on("click", async function() {
+    $(".reedem-btn").on("click", async function() {
             const couponCode = $("input[name='coupon']").val();
 
             if(couponCode == "") {
@@ -273,9 +273,9 @@ $(function() {
                 
             }
             
-        });
+    });
 
-        $(".clipboard-btn").on("click", function() {
+    $(".clipboard-btn").on("click", function() {
             const trackingNumber = $(".tracking-number").html();
 
             navigator.clipboard.writeText(trackingNumber).then(() => {
@@ -289,8 +289,25 @@ $(function() {
             }).catch((err) => {
                 console.error('Could not copy text: ', err);
             });
-        });
+    });
     
-   
+    $(':radio').change(function() {
+        $("input[name='rating']").val(this.value);
+    });
 
+    $("input[name='file']").on("change", function(e) {
+        $(".profile-picture-preview").attr("src", URL.createObjectURL(e.target.files[0]));
+    })
+         
+    $("input[name='confirmPassword']").on("change", function() {
+        const passwordValue = $("input[name='password']").val();
+        const confirmPasswordValue = $(this).val();
+
+        if(passwordValue === confirmPasswordValue) {
+            $(".password-btn").prop("disabled", false);
+        } else {
+            $(".password-btn").prop("disabled", true);
+        }
+    })
+    
 })

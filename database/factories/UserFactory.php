@@ -22,6 +22,9 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'address' => fake()->address(),
+            'country' => fake()->country(),
+            'state' => fake()->state(),
+            'zip' => fake()->postcode(),
             'is_admin' => false,
             "profile_picture" => "https://media.licdn.com/dms/image/C5603AQEJq3JSuwNYSQ/profile-displayphoto-shrink_800_800/0/1638238218610?e=2147483647&v=beta&t=oDvk1ZQK-XmYSFN9-MLdXPP2WvEh_whSg9235gdWnsg", 
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

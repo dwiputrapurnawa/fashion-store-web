@@ -53,10 +53,6 @@ class User extends Authenticatable
         return $this->belongsToMany(Product::class, "wishlists")->withPivot("id");
     }
 
-    public function product_rating() {
-        return $this->belongsToMany(Product::class, "ratings")->withPivot("value");
-    }
-
     public function review() {
         return $this->hasOne(Review::class);
     }

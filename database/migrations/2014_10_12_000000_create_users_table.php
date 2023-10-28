@@ -18,6 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string("profile_picture")->nullable();
             $table->string("phone_number")->nullable();

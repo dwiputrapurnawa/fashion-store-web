@@ -26,10 +26,6 @@ class Product extends Model
         return $this->belongsToMany(User::class, "wishlists")->withPivot("id");
     }
 
-    public function user_rating() {
-        return $this->belongsToMany(User::class, "ratings")->withPivot("value");
-    }
-
     public function comments() {
         return $this->hasMany(Comment::class);
     }
@@ -50,12 +46,12 @@ class Product extends Model
         return $this->hasMany(Images::class);
     }
 
-    public function getAvgRating() {
-        return $this->user_rating()->avg("value");
-    }
-
     public function scopeFilter($query, $filter) {
         return $query->where("name", "like", "%" . $filter . "%");
+    }
+
+    public function getAvgRating() {
+        return $this->reviews()->avg("rating");
     }
 
 

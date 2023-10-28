@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id");
             $table->foreignId("product_id");
-            $table->foreignId("rating_id");
             $table->text("content");
+            $table->integer("rating")->min(1)->max(5)->default(0);
             $table->timestamps();
         });
     }

@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
         Product::factory(20)->create();
         Category::factory(3)->create();
         Wishlist::factory(10)->create();
-        // Rating::factory(20)->create();
         Comment::factory(100)->create();
         Discount::factory(5)->create();
         // Review::factory(20)->create();

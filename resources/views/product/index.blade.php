@@ -34,10 +34,10 @@
         <div class="col-lg">
             <h5>{{ $product->name }}</h5>
             <div class="row">
-                <p class="d-inline col-sm-auto">Sold 100+</p>
+                <p class="d-inline col-sm-auto">Sold {{ $product->orders->count() }}</p>
                 <div class="d-inline col-sm-auto">
                     <i class="fa-solid fa-star" style="color: #ffc800;"></i> {{ round($product->getAvgRating(), 1) }}
-                    <p class="d-inline">({{ $product->user_rating->count() }} Rating)</p>
+                    <p class="d-inline">({{ $product->reviews->count() }} Rating)</p>
                 </div>
                 <p class="d-inline col-sm-auto">Discussion ({{ $product->comments->count() }})</p>
             </div>
@@ -144,11 +144,11 @@
 
                         <div class="col-sm"> 
 
-                                @for ($i = 0; $i < $review->rating->value; $i++)
+                                @for ($i = 0; $i < $review->rating; $i++)
                                     <i class="fa-solid fa-star" style="color: #ffc800;"></i>
                                 @endfor
 
-                                @for ($i = 0; $i < (5-$review->rating->value); $i++)
+                                @for ($i = 0; $i < (5-$review->rating); $i++)
                                 <i class="fa-regular fa-star" style="color: #ffc800;"></i>
                                 @endfor
                             
