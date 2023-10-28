@@ -41,7 +41,7 @@
             <div class="mb-3">
               @if (!$productDeal->product->reviews->isEmpty())
                 <i class="fa-solid fa-star" style="color: #ffc800;"></i>
-                <p class="card-text d-inline text-secondary">{{ round($productDeal->product->getAvgRating(), 2) }} | Terjual 5.9K</p>              
+                <p class="card-text d-inline text-secondary">{{ round($productDeal->product->getAvgRating(), 2) }} | Sold {{ $productDeal->product->orders->count() }}</p>              
               @endif
               
             </div>
@@ -88,7 +88,7 @@
             <div class="mb-3">
               @if (!$product->reviews->isEmpty())
                 <i class="fa-solid fa-star" style="color: #ffc800;"></i>
-                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 2) }} | Terjual 5.9K</p>              
+                <p class="card-text d-inline text-secondary">{{ round($product->getAvgRating(), 2) }} | Sold {{ $product->orders->count() }}</p>              
               @endif
             </div>
 
