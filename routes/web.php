@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomeController::class, "index"]);
 
-Route::get("/login", [LoginController::class, "index"]);
+Route::get("/login", [LoginController::class, "index"])->name("login");
 Route::post("/login", [LoginController::class, "login"]);
 
 Route::post("/logout", [LoginController::class, "logout"]);
@@ -51,46 +51,46 @@ Route::post("/product", [ProductController::class, "store"]);
 Route::get("/categories/{category:slug}", [CategoryPageController::class, "index"]);
 Route::post("/categories", [CategoryController::class, "store"]);
 
-Route::get("/cart", [CartController::class, "index"]);
-Route::post("/cart", [CartController::class, "store"]);
-Route::delete("/cart", [CartController::class, "destroy"]);
-Route::patch("/cart", [CartController::class, "update"]);
+Route::get("/cart", [CartController::class, "index"])->middleware("auth");
+Route::post("/cart", [CartController::class, "store"])->middleware("auth");
+Route::delete("/cart", [CartController::class, "destroy"])->middleware("auth");
+Route::patch("/cart", [CartController::class, "update"])->middleware("auth");
 
-Route::get("/wishlist", [WishlistController::class, "index"]);
-Route::post("/wishlist", [WishlistController::class, "store"]);
-Route::delete("/wishlist", [WishlistController::class, "destroy"]);
+Route::get("/wishlist", [WishlistController::class, "index"])->middleware("auth");
+Route::post("/wishlist", [WishlistController::class, "store"])->middleware("auth");
+Route::delete("/wishlist", [WishlistController::class, "destroy"])->middleware("auth");
 
-Route::post("/comment", [CommentController::class, "store"]);
-Route::delete("/comment", [CommentController::class, "destroy"]);
+Route::post("/comment", [CommentController::class, "store"])->middleware("auth");
+Route::delete("/comment", [CommentController::class, "destroy"])->middleware("auth");
 
-Route::get("/coupon", [CouponController::class, "checkCoupon"]);
+Route::get("/coupon", [CouponController::class, "checkCoupon"])->middleware("auth");
 
-Route::get("/purchase", [PurchaseController::class, "index"]);
+Route::get("/purchase", [PurchaseController::class, "index"])->middleware("auth");
 
-Route::get("/dashboard", [DashboardController::class, "index"]);
-Route::get("/dashboard/products", [ProductController::class, "index"]);
-Route::get("/dashboard/products/create", [ProductController::class, "create"]);
-Route::get("/dashboard/products/{product:slug}", [ProductController::class, "show"]);
-Route::get("/dashboard/products/{product:slug}/edit", [ProductController::class, "edit"]);
+Route::get("/dashboard", [DashboardController::class, "index"])->middleware("is_admin");
+Route::get("/dashboard/products", [ProductController::class, "index"])->middleware("is_admin");
+Route::get("/dashboard/products/create", [ProductController::class, "create"])->middleware("is_admin");
+Route::get("/dashboard/products/{product:slug}", [ProductController::class, "show"])->middleware("is_admin");
+Route::get("/dashboard/products/{product:slug}/edit", [ProductController::class, "edit"])->middleware("is_admin");
 
 
-Route::post("/images", [ImagesController::class, "store"]);
-Route::delete("/images", [ImagesController::class, "destroy"]);
+Route::post("/images", [ImagesController::class, "store"])->middleware("is_admin");
+Route::delete("/images", [ImagesController::class, "destroy"])->middleware("is_admin");
 
-Route::get("/dashboard/orders", [OrderController::class, "index"]);
-Route::patch("/order", [OrderController::class, "update"]);
-Route::post("/order", [OrderController::class, "store"]);
+Route::get("/dashboard/orders", [OrderController::class, "index"])->middleware("is_admin");
+Route::patch("/order", [OrderController::class, "update"])->middleware("is_admin");
+Route::post("/order", [OrderController::class, "store"])->middleware("is_admin");
 
 Route::post("/discount", [DiscountController::class, "store"]);
 
-Route::get("/dashboard/customers", [CustomerController::class, "index"]);
-Route::post("/dashboard/customers", [CustomerController::class, "store"]);
-Route::delete("/dashboard/customers", [CustomerController::class, "destroy"]);
-Route::patch("/dashboard/customers", [CustomerController::class, "update"]);
+Route::get("/dashboard/customers", [CustomerController::class, "index"])->middleware("is_admin");
+Route::post("/dashboard/customers", [CustomerController::class, "store"])->middleware("is_admin");
+Route::delete("/dashboard/customers", [CustomerController::class, "destroy"])->middleware("is_admin");
+Route::patch("/dashboard/customers", [CustomerController::class, "update"])->middleware("is_admin");
 
-Route::post("/review", [ReviewController::class, "store"]);
+Route::post("/review", [ReviewController::class, "store"])->middleware("auth");
 
-Route::get("/account-settings", [AccountSettingsController::class, "index"]);
-Route::get("/account-settings/change-password", [AccountSettingsController::class, "change_password_index"]);
+Route::get("/account-settings", [AccountSettingsController::class, "index"])->middleware("auth");
+Route::get("/account-settings/change-password", [AccountSettingsController::class, "change_password_index"])->middleware("auth");
 
-Route::patch("/user", [UserController::class, "update"]);
+Route::patch("/user", [UserController::class, "update"])->middleware("auth");

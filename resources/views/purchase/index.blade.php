@@ -19,7 +19,7 @@
         <div class="border rounded p-3">
             <div class="row">
                 <div class="col-lg-auto">
-                    <img style="width: 100px" class="img-fluid mb-3 rounded-circle" src="{{ auth()->user()->profile_picture }}" alt="user-account">
+                    <img style="width: 100px" class="img-fluid mb-3 rounded-circle" src="/{{ auth()->user()->profile_picture ?? 'images/blank-profile-picture.png' }}" alt="user-account">
                 </div>
                 <div class="col-lg align-items-center d-flex">
                     <p>{{ auth()->user()->name }}</p>

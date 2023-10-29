@@ -29,7 +29,7 @@
                 <div class="mb-3 p-3">
                     <h5 class="fw-bold">Profile Picture</h5>
                     
-                    <img class="img-fluid rounded-circle mt-3 m-auto d-block mb-4 profile-picture-preview border" src="/{{ auth()->user()->profile_picture }}" style="width: 30%">
+                    <img class="img-fluid rounded-circle mt-3 m-auto d-block mb-4 profile-picture-preview border" src="/{{ auth()->user()->profile_picture ?? 'images/blank-profile-picture.png' }}" style="width: 30%">
 
                     <form action="/user" method="post" enctype="multipart/form-data">
                         @csrf
